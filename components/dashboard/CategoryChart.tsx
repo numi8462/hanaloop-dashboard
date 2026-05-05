@@ -82,7 +82,7 @@ export default function CategoryChart({
       <h3 className="text-sm font-semibold text-slate-900 mb-4">
         카테고리별 배출 비율
       </h3>
-      <ResponsiveContainer width="100%" height={240}>
+      <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
             data={data}
