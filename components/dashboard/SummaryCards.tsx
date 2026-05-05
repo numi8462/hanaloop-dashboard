@@ -81,7 +81,7 @@ export default function SummaryCards({
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {cards.map((card, i) => (
+      {cards.map((card) => (
         <div
           key={card.label}
           className={`animate-fade-in-up animate-stagger-1`}

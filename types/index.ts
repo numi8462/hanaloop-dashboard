@@ -1,11 +1,11 @@
 export type EmissionType = "전기" | "원소재" | "운송";
 
-export type GhgScope = "Scope 1" | "Scope 2" | "Scope 3";
+export type GhgScope = "스코프 1" | "스코프 2" | "스코프 3";
 
 export const SCOPE_MAP: Record<EmissionType, GhgScope> = {
-  전기: "Scope 2",
-  원소재: "Scope 3",
-  운송: "Scope 3",
+  전기: "스코프 2",
+  원소재: "스코프 3",
+  운송: "스코프 3",
 };
 
 export const UNIT_MAP: Record<EmissionType, string> = {

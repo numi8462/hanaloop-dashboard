@@ -61,6 +61,7 @@ export default function Sidebar() {
           alt="HanaLoop"
           width={40}
           height={20}
+          className="h-6 w-auto"
           priority
         />
         <p className="font-semibold text-black">하나루프</p>

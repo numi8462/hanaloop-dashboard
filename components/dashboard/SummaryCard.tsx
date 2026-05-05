@@ -24,7 +24,7 @@ export default function SummaryCard({
   return (
     <div className="card p-5">
       {/* 상단: 라벨 + 아이콘 */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between mb-3">
         <div>
           <p className="text-sm font-semibold text-slate-500">{label}</p>
           {scope && (

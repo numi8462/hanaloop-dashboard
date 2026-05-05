@@ -1,4 +1,24 @@
+import CategoryChart from "@/components/dashboard/CategoryChart";
 import SummaryCards from "@/components/dashboard/SummaryCards";
+import { CategorySummary } from "@/types";
+
+const DUMMY_CATEGORY: CategorySummary[] = [
+  {
+    type: "전기",
+    totalCo2e: 1200,
+    scope: "스코프 2",
+    percentage: 23,
+    count: 9,
+  },
+  {
+    type: "원소재",
+    totalCo2e: 3200,
+    scope: "스코프 3",
+    percentage: 61,
+    count: 11,
+  },
+  { type: "운송", totalCo2e: 830, scope: "스코프 3", percentage: 16, count: 9 },
+];
 
 export default function DashboardPage() {
   return (
@@ -25,6 +45,10 @@ export default function DashboardPage() {
         ]}
         isLoading={false}
       />
+
+      <div className="mt-6">
+        <CategoryChart byCategory={DUMMY_CATEGORY} isLoading={false} />
+      </div>
     </div>
   );
 }
