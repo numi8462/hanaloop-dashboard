@@ -2,8 +2,9 @@
 
 import { Zap, Package, Truck, Leaf } from "lucide-react";
 import SummaryCard from "./SummaryCard";
-import { CardSkeleton } from "./CardSkeleton";
+import { CardSkeleton } from "./skeleton/CardSkeleton";
 import { formatCo2e } from "@/lib/pcf-calculator";
+import { CATEGORY_COLORS } from "@/constants/colors";
 
 interface CategorySummary {
   type: string;
@@ -21,18 +22,21 @@ interface SummaryCardsProps {
 const CATEGORY_CONFIG = {
   전기: {
     icon: <Zap size={20} />,
-    color: "text-yellow-500",
-    bg: "bg-yellow-50",
+    color: CATEGORY_COLORS["전기"],
+    bg: "#e8f0f9",
+    textColor: "text-[#08428C]",
   },
   원소재: {
     icon: <Package size={20} />,
-    color: "text-violet-500",
-    bg: "bg-violet-50",
+    color: CATEGORY_COLORS["원소재"],
+    bg: "#edf6fd",
+    textColor: "text-[#2995D9]",
   },
   운송: {
     icon: <Truck size={20} />,
-    color: "text-orange-500",
-    bg: "bg-orange-50",
+    color: CATEGORY_COLORS["운송"],
+    bg: "#f0faff",
+    textColor: "text-[#79CFF2]",
   },
 } as const;
 

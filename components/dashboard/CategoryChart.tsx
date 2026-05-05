@@ -2,8 +2,8 @@
 
 import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { CategorySummary } from "@/types";
-import CategoryChartSkeleton from "./CategoryChartSkeleton";
-import { COLORS } from "@/constants/chart";
+import CategoryChartSkeleton from "./skeleton/CategoryChartSkeleton";
+import { CATEGORY_COLORS } from "@/constants/colors";
 
 // ─── 툴팁 타입 ────────────────────────────────────────────────────────────────
 interface TooltipPayloadItem {
@@ -74,7 +74,7 @@ export default function CategoryChart({
     ...cat,
     name: cat.type,
     value: cat.totalCo2e,
-    fill: COLORS[cat.type] ?? "#94a3b8",
+    fill: CATEGORY_COLORS[cat.type] ?? "#94a3b8",
   }));
 
   return (
@@ -82,12 +82,12 @@ export default function CategoryChart({
       <h3 className="text-sm font-semibold text-slate-900 mb-4">
         카테고리별 배출 비율
       </h3>
-      <ResponsiveContainer width="100%" height={160}>
+      <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie
             data={data}
             cx="50%"
-            cy="90%"
+            cy="70%"
             startAngle={180}
             endAngle={0}
             innerRadius={60}

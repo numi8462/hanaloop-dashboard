@@ -55,7 +55,7 @@ export default function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 h-screen flex flex-col w-60 bg-white border-r border-border z-40">
       {/* 로고 */}
-      <div className="flex items-center px-5 h-16 border-b border-border gap-1">
+      <div className="flex items-center px-5 h-16 border-b border-border gap-2">
         <Image
           src="/hanaloop-logo.png"
           alt="HanaLoop"
@@ -64,12 +64,12 @@ export default function Sidebar() {
           className="h-6 w-auto"
           priority
         />
-        <p className="font-semibold text-black">하나루프</p>
+        <p className="font-semibold text-slate-900">하나루프</p>
       </div>
 
       {/* 네비게이션 */}
       <nav className="flex-1 px-3 py-4">
-        <p className="px-2 py-1 text-xs font-semibold tracking-widest mb-1 text-(--color-text-muted)">
+        <p className="px-2 py-1 text-xs font-semibold tracking-widest mb-1 text-slate-400">
           메인 메뉴
         </p>
         <ul className="space-y-0.5">
@@ -87,10 +87,10 @@ export default function Sidebar() {
                     flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                     ${
                       isActive
-                        ? "bg-(--color-text-primary) text-white"
+                        ? "bg-slate-900 text-white"
                         : isDisabled
-                          ? "text-(--color-text-muted) opacity-60 cursor-not-allowed"
-                          : "text-(--color-text-secondary) hover:bg-(--color-surface-raised) hover:text-(--color-text-primary)"
+                          ? "text-slate-400 opacity-60 cursor-not-allowed"
+                          : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }
                   `}
                 >

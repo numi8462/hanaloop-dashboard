@@ -82,15 +82,13 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --color-brand: #16a34a;
-  --color-brand-subtle: #f0fdf4;
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-surface-raised: #f1f5f9;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
-  --sidebar-width: 240px;
+  --color-brand: #08428c;
+  --color-brand-light: #2995d9;
+  --color-brand-dark: #05285a;
+  --color-brand-subtle: #e8f0f9;
+  --color-electricity: #08428c;
+  --color-material: #2995d9;
+  --color-transport: #79cff2;
 }
 
 .dark {
@@ -188,17 +186,14 @@
 
 /* ─── Scope 배지 ─────────────────────────────────────────────── */
 .badge-scope1 {
-  background: #fff7ed;
-  color: #c2410c;
-  border: 1px solid #fed7aa;
+  background: #e8f0f9;
+  color: #05285a;
 }
 .badge-scope2 {
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #bfdbfe;
+  background: #e8f0f9;
+  color: #08428c;
 }
 .badge-scope3 {
-  background: #f5f3ff;
-  color: #6d28d9;
-  border: 1px solid #ddd6fe;
+  background: #edf6fd;
+  color: #1a6fa8;
 }
