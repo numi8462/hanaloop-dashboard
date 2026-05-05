@@ -22,21 +22,18 @@ interface SummaryCardsProps {
 const CATEGORY_CONFIG = {
   전기: {
     icon: <Zap size={20} />,
-    color: CATEGORY_COLORS["전기"],
-    bg: "#e8f0f9",
-    textColor: "text-[#08428C]",
+    iconColor: "text-[#08428C]",
+    iconBg: "bg-[#e8f0f9]",
   },
   원소재: {
     icon: <Package size={20} />,
-    color: CATEGORY_COLORS["원소재"],
-    bg: "#edf6fd",
-    textColor: "text-[#2995D9]",
+    iconColor: "text-[#2995D9]",
+    iconBg: "bg-[#edf6fd]",
   },
   운송: {
     icon: <Truck size={20} />,
-    color: CATEGORY_COLORS["운송"],
-    bg: "#f0faff",
-    textColor: "text-[#79CFF2]",
+    iconColor: "text-[#79CFF2]",
+    iconBg: "bg-[#f0faff]",
   },
 } as const;
 
@@ -75,8 +72,8 @@ export default function SummaryCards({
         value: fmt.value,
         unit: fmt.unit,
         icon: cfg.icon,
-        iconColor: cfg.color,
-        iconBg: cfg.bg,
+        iconColor: cfg.iconColor,
+        iconBg: cfg.iconBg,
         percentage: cat?.percentage ?? 0,
         scope: cat?.scope,
       };
