@@ -138,3 +138,67 @@
     @apply font-sans;
   }
 }
+
+/* ─── 카드 ───────────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.08),
+    0 1px 2px -1px rgb(0 0 0 / 0.05);
+  height: 160px;
+}
+
+/* ─── 스켈레톤 로딩 ──────────────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* ─── 페이드인 애니메이션 ────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+.animate-stagger-1 {
+  animation-delay: 0.05s;
+}
+
+/* ─── Scope 배지 ─────────────────────────────────────────────── */
+.badge-scope1 {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+.badge-scope2 {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+.badge-scope3 {
+  background: #f5f3ff;
+  color: #6d28d9;
+  border: 1px solid #ddd6fe;
+}

@@ -63,7 +63,7 @@ export default function Sidebar() {
           height={20}
           priority
         />
-        <p className="font-semibold">하나루프</p>
+        <p className="font-semibold text-black">하나루프</p>
       </div>
 
       {/* 네비게이션 */}
