@@ -27,3 +27,18 @@ export async function deleteActivity(id: string): Promise<void> {
   const res = await fetch(`/api/activities/${id}`, { method: "DELETE" });
   if (!res.ok) throw new Error("삭제에 실패했습니다.");
 }
+
+/** 활동 데이터 수정 */
+export async function updateActivity(
+  id: string,
+  input: Partial<ActivityInput>,
+): Promise<ActivityData> {
+  const res = await fetch(`/api/activities/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error ?? "수정에 실패했습니다.");
+  return json.data;
+}

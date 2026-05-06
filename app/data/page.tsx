@@ -4,12 +4,13 @@ import { useActivities } from "@/hooks/useActivities";
 import { useDashboardStore } from "@/store/dashboardStore";
 import ActivityForm from "@/components/data/ActivityForm";
 import ActivityTable from "@/components/data/ActivityTable";
-import { ActivityInput } from "@/types";
+import { ActivityData, ActivityInput } from "@/types";
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
 
 export default function DataPage() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editTarget, setEditTarget] = useState<ActivityData | null>(null);
 
   const {
     activities,
@@ -18,6 +19,7 @@ export default function DataPage() {
     saveError,
     successMessage,
     createActivity,
+    updateActivity,
     deleteActivity,
     clearMessages,
   } = useActivities();
@@ -35,6 +37,26 @@ export default function DataPage() {
     const success = await deleteActivity(id);
     if (success) invalidateDashboard();
     return success;
+  }
+
+  async function handleUpdate(
+    id: string,
+    input: Partial<ActivityInput>,
+  ): Promise<boolean> {
+    const success = await updateActivity(id, input);
+    if (success) invalidateDashboard();
+    return success;
+  }
+
+  function handleEdit(activity: ActivityData) {
+    setEditTarget(activity);
+    // 모바일에서 수정 버튼 클릭 시 폼 열기
+    setIsFormOpen(true);
+  }
+
+  function handleCancelEdit() {
+    setEditTarget(null);
+    setIsFormOpen(false);
   }
 
   return (
@@ -63,7 +85,11 @@ export default function DataPage() {
       {isFormOpen && (
         <div className="lg:hidden mb-6">
           <ActivityForm
+            key={editTarget?.id ?? "new"}
             onSubmit={handleCreate}
+            onUpdate={handleUpdate}
+            editTarget={editTarget}
+            onCancelEdit={handleCancelEdit}
             isSaving={isSaving}
             saveError={saveError}
             successMessage={successMessage}
@@ -80,7 +106,11 @@ export default function DataPage() {
         {/* 데스크탑에서만 보이는 폼 */}
         <div className="hidden lg:block self-start sticky top-6">
           <ActivityForm
+            key={editTarget?.id ?? "new"}
             onSubmit={handleCreate}
+            onUpdate={handleUpdate}
+            editTarget={editTarget}
+            onCancelEdit={handleCancelEdit}
             isSaving={isSaving}
             saveError={saveError}
             successMessage={successMessage}
@@ -93,6 +123,7 @@ export default function DataPage() {
           activities={activities}
           isLoading={isLoading}
           onDelete={handleDelete}
+          onEdit={handleEdit}
           isSaving={isSaving}
         />
       </div>

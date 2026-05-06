@@ -23,6 +23,7 @@ export function useActivities() {
     saveError: store.saveError,
     successMessage: store.successMessage,
     createActivity: store.createActivity,
+    updateActivity: store.updateActivity,
     deleteActivity: store.deleteActivity,
     clearMessages: store.clearMessages,
   };

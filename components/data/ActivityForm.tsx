@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ActivityInput, EmissionType, UNIT_MAP } from "@/types";
+import { ActivityData, ActivityInput, EmissionType, UNIT_MAP } from "@/types";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -28,6 +28,9 @@ interface FormErrors {
 
 interface ActivityFormProps {
   onSubmit: (input: ActivityInput) => Promise<boolean>;
+  onUpdate?: (id: string, input: Partial<ActivityInput>) => Promise<boolean>;
+  editTarget?: ActivityData | null;
+  onCancelEdit?: () => void;
   isSaving: boolean;
   saveError: string | null;
   successMessage: string | null;
@@ -36,16 +39,20 @@ interface ActivityFormProps {
 
 export default function ActivityForm({
   onSubmit,
+  onUpdate,
+  editTarget,
+  onCancelEdit,
   isSaving,
   saveError,
   successMessage,
   onClearMessages,
 }: ActivityFormProps) {
   const [form, setForm] = useState({
-    date: new Date().toISOString().slice(0, 10),
-    type: "" as EmissionType | "",
-    description: "",
-    amount: "",
+    date:
+      editTarget?.date.slice(0, 10) ?? new Date().toISOString().slice(0, 10),
+    type: (editTarget?.type ?? "") as EmissionType | "",
+    description: editTarget?.description ?? "",
+    amount: editTarget?.amount ? String(editTarget.amount) : "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -95,7 +102,6 @@ export default function ActivityForm({
   async function handleSubmit() {
     setTouched({ date: true, type: true, description: true, amount: true });
     const newErrors = validate();
-
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -109,24 +115,30 @@ export default function ActivityForm({
       unit: UNIT_MAP[form.type as EmissionType],
     };
 
-    const success = await onSubmit(input);
-
-    if (success) {
-      setForm({
-        date: new Date().toISOString().slice(0, 10),
-        type: "",
-        description: "",
-        amount: "",
-      });
-      setErrors({});
-      setTouched({});
+    if (editTarget) {
+      // 수정 모드
+      const success = await onUpdate?.(editTarget.id, input);
+      if (success) onCancelEdit?.();
+    } else {
+      // 추가 모드
+      const success = await onSubmit(input);
+      if (success) {
+        setForm({
+          date: new Date().toISOString().slice(0, 10),
+          type: "",
+          description: "",
+          amount: "",
+        });
+        setErrors({});
+        setTouched({});
+      }
     }
   }
 
   return (
     <div className="card p-6">
       <h3 className="text-base font-semibold text-slate-100 mb-5">
-        활동 데이터 추가
+        {editTarget ? "활동 데이터 수정" : "활동 데이터 추가"}
       </h3>
 
       <div className="flex flex-col gap-4">
@@ -248,13 +260,25 @@ export default function ActivityForm({
         )}
 
         {/* 버튼 */}
-        <button
-          onClick={handleSubmit}
-          disabled={isSaving}
-          className="w-full py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-600 transition-colors"
+        <div
+          className={`grid gap-2 ${editTarget ? "grid-cols-2" : "grid-cols-1"}`}
         >
-          {isSaving ? "저장 중..." : "데이터 추가"}
-        </button>
+          {editTarget && (
+            <button
+              onClick={onCancelEdit}
+              className="py-2.5 rounded-lg text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+            >
+              취소
+            </button>
+          )}
+          <button
+            onClick={handleSubmit}
+            disabled={isSaving}
+            className="py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+          >
+            {isSaving ? "저장 중..." : editTarget ? "수정 완료" : "데이터 추가"}
+          </button>
+        </div>
       </div>
     </div>
   );

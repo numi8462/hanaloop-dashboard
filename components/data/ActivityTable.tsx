@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ActivityData, EmissionType } from "@/types";
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import TableSkeleton from "./skeleton/TableSkeleton";
 import { TYPE_BADGE } from "@/constants/colors";
 import { ACTIVITY_TABLE_COLUMNS } from "@/constants/tableColumns";
@@ -11,6 +11,7 @@ interface ActivityTableProps {
   activities: ActivityData[];
   isLoading: boolean;
   onDelete: (id: string) => Promise<boolean>;
+  onEdit: (activity: ActivityData) => void;
   isSaving: boolean;
 }
 
@@ -18,6 +19,7 @@ export default function ActivityTable({
   activities,
   isLoading,
   onDelete,
+  onEdit,
   isSaving,
 }: ActivityTableProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -97,7 +99,16 @@ export default function ActivityTable({
                     <td className="px-4 py-3 text-slate-400">
                       {activity.unit}
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-2 py-3 w-px whitespace-nowrap">
+                      {/* 수정 버튼 */}
+                      <button
+                        onClick={() => onEdit(activity)}
+                        disabled={isSaving}
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#08428C] hover:bg-[#e8f0f9] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <Pencil size={14} />
+                      </button>
+                      {/* 삭제 버튼 */}
                       <button
                         onClick={() => handleDelete(activity.id)}
                         disabled={isSaving || deletingId === activity.id}

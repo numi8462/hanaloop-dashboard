@@ -4,6 +4,7 @@ import {
   getActivities,
   createActivity,
   deleteActivity,
+  updateActivity,
 } from "@/services/activityService";
 
 interface ActivityState {
@@ -17,6 +18,10 @@ interface ActivityState {
   fetchActivities: () => Promise<void>;
   createActivity: (input: ActivityInput) => Promise<boolean>;
   deleteActivity: (id: string) => Promise<boolean>;
+  updateActivity: (
+    id: string,
+    input: Partial<ActivityInput>,
+  ) => Promise<boolean>;
   clearMessages: () => void;
 }
 
@@ -75,6 +80,25 @@ export const useActivityStore = create<ActivityState>((set) => ({
     } catch (e) {
       set({
         saveError: e instanceof Error ? e.message : "삭제에 실패했습니다.",
+      });
+      return false;
+    } finally {
+      set({ isSaving: false });
+    }
+  },
+
+  updateActivity: async (id, input) => {
+    set({ isSaving: true, saveError: null, successMessage: null });
+    try {
+      const activity = await updateActivity(id, input);
+      set((state) => ({
+        activities: state.activities.map((a) => (a.id === id ? activity : a)),
+        successMessage: "활동 데이터가 수정되었습니다.",
+      }));
+      return true;
+    } catch (e) {
+      set({
+        saveError: e instanceof Error ? e.message : "수정에 실패했습니다.",
       });
       return false;
     } finally {
