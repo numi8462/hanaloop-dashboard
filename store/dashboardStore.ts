@@ -1,3 +1,4 @@
+import { getDashboardSummary, getPcfResults } from "@/services/pcfService";
 import { DashboardSummary, PcfResult } from "@/types";
 import { create } from "zustand";
 
@@ -30,41 +31,24 @@ export const useDashboardStore = create<DashboardState>((set, get) => ({
 
   fetchData: async () => {
     const { isLoading, lastFetched } = get();
-
     // 이미 로딩 중이면 중복 요청 방지
     if (isLoading) return;
-
     // 30초 이내 fetch된 데이터 있으면 재사용
     if (lastFetched && Date.now() - lastFetched < 30_000) return;
 
     set({ isLoading: true, error: null });
-
     try {
-      const [summaryRes, pcfRes] = await Promise.all([
-        fetch("/api/pcf?format=summary"),
-        fetch("/api/pcf"),
+      const [summary, pcfResults] = await Promise.all([
+        getDashboardSummary(),
+        getPcfResults(),
       ]);
-
-      if (!summaryRes.ok || !pcfRes.ok) {
-        throw new Error("데이터를 불러오지 못했습니다.");
-      }
-
-      const [summaryJson, pcfJson] = await Promise.all([
-        summaryRes.json(),
-        pcfRes.json(),
-      ]);
-
-      set({
-        summary: summaryJson.data,
-        pcfResults: pcfJson.data,
-        isLoading: false,
-        lastFetched: Date.now(),
-      });
+      set({ summary, pcfResults, lastFetched: Date.now() });
     } catch (e) {
       set({
         error: e instanceof Error ? e.message : "데이터를 불러오지 못했습니다.",
-        isLoading: false,
       });
+    } finally {
+      set({ isLoading: false });
     }
   },
 
