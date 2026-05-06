@@ -43,7 +43,7 @@ export default function SummaryCards({
 }: SummaryCardsProps) {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
           <CardSkeleton key={i} />
         ))}
