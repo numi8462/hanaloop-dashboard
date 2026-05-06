@@ -54,7 +54,7 @@ export default function EmissionFactorsPage() {
           </span>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-150 text-sm">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-100">
                 {[

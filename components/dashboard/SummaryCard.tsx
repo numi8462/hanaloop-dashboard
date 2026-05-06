@@ -24,9 +24,11 @@ export default function SummaryCard({
   return (
     <div className="card p-5">
       {/* 상단: 라벨 + 아이콘 */}
-      <div className="flex items-start justify-between mb-3 h-12">
-        <div>
-          <p className="text-sm font-semibold text-slate-500">{label}</p>
+      <div className="flex items-start justify-between mb-3 h-12 min-w-0">
+        <div className="min-w-0 flex-1 mr-2">
+          <p className="text-sm font-semibold text-slate-500 truncate">
+            {label}
+          </p>
           {scope && (
             <span
               className={`text-xs px-1.5 py-1 rounded-2xl font-medium mt-1 inline-flex items-center justify-center ${
@@ -38,18 +40,20 @@ export default function SummaryCard({
           )}
         </div>
         <div
-          className={`rounded-xl flex items-center justify-center w-10.5 h-10.5 ${iconBg} ${iconColor}`}
+          className={`rounded-xl flex items-center justify-center w-10 h-10 shrink-0 ${iconBg} ${iconColor}`}
         >
           {icon}
         </div>
       </div>
 
       {/* 수치 */}
-      <div className="flex items-baseline gap-1.5">
-        <span className="text-3xl font-bold tracking-tight text-slate-900">
+      <div className="flex items-baseline gap-1.5 min-w-0">
+        <span className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-900 truncate">
           {value}
         </span>
-        <span className="text-sm font-medium text-slate-400">{unit}</span>
+        <span className="text-xs lg:text-sm font-medium text-slate-400 shrink-0">
+          {unit}
+        </span>
       </div>
 
       {/* 비율 */}

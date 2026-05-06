@@ -4,22 +4,17 @@ import CategoryChart from "@/components/dashboard/CategoryChart";
 import MonthlyTrendChart from "@/components/dashboard/MontlyTrendChart";
 import SummaryCards from "@/components/dashboard/SummaryCards";
 import {
+  useDashboard,
   useCategorySummary,
   useMonthlySummary,
   useTotalCo2e,
 } from "@/hooks/useDashboard";
-import { useDashboardStore } from "@/store/dashboardStore";
-import { useEffect } from "react";
 
 export default function DashboardPage() {
-  const { isLoading, error, fetchData } = useDashboardStore();
+  const { isLoading, error } = useDashboard();
   const totalCo2e = useTotalCo2e();
   const byCategory = useCategorySummary();
   const byMonth = useMonthlySummary();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className="p-8">
@@ -37,19 +32,20 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* 테스트용 더미 데이터 */}
+      {/* KPI 카드 */}
       <SummaryCards
         totalCo2e={totalCo2e}
         byCategory={byCategory}
         isLoading={isLoading}
       />
 
-      <div className="grid grid-cols-4 gap-4 mt-6">
-        <div className="col-span-1">
-          <CategoryChart byCategory={byCategory} isLoading={false} />
+      {/* 차트 */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-6">
+        <div className="lg:col-span-1">
+          <CategoryChart byCategory={byCategory} isLoading={isLoading} />
         </div>
-        <div className="col-span-3">
-          <MonthlyTrendChart byMonth={byMonth} isLoading={false} />
+        <div className="lg:col-span-3">
+          <MonthlyTrendChart byMonth={byMonth} isLoading={isLoading} />
         </div>
       </div>
     </div>

@@ -87,11 +87,11 @@ export default function CategoryChart({
           <Pie
             data={data}
             cx="50%"
-            cy="70%"
+            cy="65%"
             startAngle={180}
             endAngle={0}
-            innerRadius={60}
-            outerRadius={110}
+            innerRadius="40%"
+            outerRadius="70%"
             paddingAngle={1}
             dataKey="value"
             animationDuration={700}

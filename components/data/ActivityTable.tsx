@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ActivityData, EmissionType } from "@/types";
 import { Trash2 } from "lucide-react";
+import TableSkeleton from "./skeleton/TableSkeleton";
 
 // 유형별 배지 스타일
 const TYPE_BADGE: Record<EmissionType, { bg: string; text: string }> = {
@@ -16,22 +17,6 @@ interface ActivityTableProps {
   isLoading: boolean;
   onDelete: (id: string) => Promise<boolean>;
   isSaving: boolean;
-}
-
-function TableSkeleton() {
-  return (
-    <>
-      {Array.from({ length: 8 }).map((_, i) => (
-        <tr key={i} className="border-b border-slate-100">
-          {Array.from({ length: 6 }).map((_, j) => (
-            <td key={j} className="px-4 py-3">
-              <div className="skeleton h-4 w-full" />
-            </td>
-          ))}
-        </tr>
-      ))}
-    </>
-  );
 }
 
 export default function ActivityTable({
@@ -60,8 +45,8 @@ export default function ActivityTable({
       </div>
 
       {/* 테이블 */}
-      <div className="overflow-x-auto overflow-y-auto max-h-150">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-150 text-sm">
           <thead>
             <tr className="bg-slate-50 border-b border-slate-100">
               {["날짜", "유형", "설명", "수량", "단위", ""].map((h) => (

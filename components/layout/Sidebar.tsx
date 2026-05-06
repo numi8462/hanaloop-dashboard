@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -10,6 +11,8 @@ import {
   TrendingUp,
   FileText,
   ChevronRight,
+  Menu,
+  X,
 } from "lucide-react";
 
 interface NavItem {
@@ -49,11 +52,12 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-export default function Sidebar() {
+// 네비게이션 내용
+function NavContent({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 h-screen flex flex-col w-60 bg-white border-r border-border z-40">
+    <>
       {/* 로고 */}
       <div className="flex items-center px-5 h-16 border-b border-border gap-2">
         <Image
@@ -65,6 +69,15 @@ export default function Sidebar() {
           priority
         />
         <p className="font-semibold text-slate-900">하나루프</p>
+        {/* 모바일에서 닫기 버튼 */}
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="ml-auto text-slate-400 hover:text-slate-900"
+          >
+            <X size={20} />
+          </button>
+        )}
       </div>
 
       {/* 네비게이션 */}
@@ -82,7 +95,10 @@ export default function Sidebar() {
               <li key={item.href}>
                 <Link
                   href={isDisabled ? "#" : item.href}
-                  onClick={(e) => isDisabled && e.preventDefault()}
+                  onClick={(e) => {
+                    if (isDisabled) e.preventDefault();
+                    else onClose?.();
+                  }}
                   className={`
                     flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                     ${
@@ -109,6 +125,44 @@ export default function Sidebar() {
           })}
         </ul>
       </nav>
-    </aside>
+    </>
+  );
+}
+
+export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      {/* 데스크탑 사이드바 */}
+      <aside className="hidden lg:flex fixed left-0 top-0 h-screen flex-col w-60 bg-white border-r border-border z-40">
+        <NavContent />
+      </aside>
+
+      {/* 모바일 햄버거 버튼 */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white border border-border shadow-sm"
+      >
+        <Menu size={20} className="text-slate-600" />
+      </button>
+
+      {/* 모바일 오버레이 */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/40 z-40"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* 모바일 드로어 */}
+      <aside
+        className={`lg:hidden fixed left-0 top-0 h-screen flex flex-col w-60 bg-white border-r border-border z-50 transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <NavContent onClose={() => setIsOpen(false)} />
+      </aside>
+    </>
   );
 }
