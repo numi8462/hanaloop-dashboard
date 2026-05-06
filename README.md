@@ -39,7 +39,7 @@ https://github.com/numi8462/hanaloop-dashboard/raw/main/screenshots/dashboard-de
 Docker만 있으면 바로 실행할 수 있습니다.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/hanaloop-dashboard.git
+git clone https://github.com/numi8462/hanaloop-dashboard.git
 cd hanaloop-dashboard
 docker compose up --build
 ```
@@ -51,13 +51,13 @@ DB 마이그레이션과 시드 데이터 삽입이 자동으로 이루어집니
 ### Docker 없이 로컬에서 실행하고 싶다면
 
 ```bash
-# 의존성 설치
+# 1. 의존성 설치
 npm install
 
-# 환경 변수 설정
-cp .env.example .env.local
+# 2. 환경 변수 설정
+cp .env.example .env
 
-# PostgreSQL 실행 (Docker 필요)
+# 3. PostgreSQL 실행 (Docker 필요)
 docker run -d --name hanaloop_db \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=password \
@@ -65,11 +65,11 @@ docker run -d --name hanaloop_db \
   -p 5432:5432 \
   postgres:16-alpine
 
-# DB 마이그레이션 + 시드 데이터
+# 4. DB 마이그레이션 + 시드 데이터
 npx prisma migrate deploy && npm run db:seed
 
-# 개발 서버 시작
-npm run dev
+# 5. 빌드 후 실행
+yarn build && yarn start
 ```
 
 → http://localhost:3000 접속
@@ -151,16 +151,15 @@ updatedAt   TIMESTAMP            validFrom      TIMESTAMP
 
 ## API
 
-| Method | URL                                 | 설명                                |
-| ------ | ----------------------------------- | ----------------------------------- |
-| GET    | `/api/activities`                   | 활동 데이터 목록 조회               |
-| POST   | `/api/activities`                   | 활동 데이터 추가                    |
-| PATCH  | `/api/activities/:id`               | 활동 데이터 수정                    |
-| DELETE | `/api/activities/:id`               | 활동 데이터 삭제                    |
-| GET    | `/api/emission-factors`             | 배출계수 전체 조회 (버전 이력 포함) |
-| GET    | `/api/emission-factors?active=true` | 현재 유효한 배출계수만 조회         |
-| GET    | `/api/pcf`                          | PCF 계산 결과 조회                  |
-| GET    | `/api/pcf?format=summary`           | 대시보드 요약 데이터 조회           |
+| Method | URL                       | 설명                                |
+| ------ | ------------------------- | ----------------------------------- |
+| GET    | `/api/activities`         | 활동 데이터 목록 조회               |
+| POST   | `/api/activities`         | 활동 데이터 추가                    |
+| PATCH  | `/api/activities/:id`     | 활동 데이터 수정                    |
+| DELETE | `/api/activities/:id`     | 활동 데이터 삭제                    |
+| GET    | `/api/emission-factors`   | 배출계수 전체 조회 (버전 이력 포함) |
+| GET    | `/api/pcf`                | PCF 계산 결과 조회                  |
+| GET    | `/api/pcf?format=summary` | 대시보드 요약 데이터 조회           |
 
 ---
 
