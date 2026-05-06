@@ -7,7 +7,7 @@ const ActivityInputSchema = z.object({
   type: z.enum(["전기", "원소재", "운송"], { message: "유형을 선택해주세요." }),
   description: z.string().min(1, "설명을 입력해주세요."),
   amount: z
-    .number({ error: "숫자를 입력해주세요." })
+    .number({ invalid_type_error: "숫자를 입력해주세요." })
     .positive("0보다 큰 값을 입력해주세요."),
   unit: z.string().min(1, "단위를 입력해주세요."),
 });

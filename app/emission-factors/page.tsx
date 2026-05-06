@@ -42,9 +42,11 @@ export default function EmissionFactorsPage() {
         </p>
       </div>
 
-      <div className="px-4 py-3 rounded-lg mb-6 text-sm bg-red-500/10 border border-red-500/30 text-red-400">
-        {error}
-      </div>
+      {error && (
+        <div className="px-4 py-3 rounded-lg mb-6 text-sm bg-red-500/10 border border-red-500/30 text-red-400">
+          {error}
+        </div>
+      )}
 
       {/* 현재 배출계수 */}
       <div className="card overflow-hidden mb-6">
