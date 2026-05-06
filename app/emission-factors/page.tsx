@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { EmissionFactor } from "@/types";
+import { EmissionFactor, EmissionType } from "@/types";
 import { getEmissionFactors } from "@/services/emissionFactorService";
+import { TYPE_BADGE } from "@/constants/colors";
+import { EMISSION_FACTOR_COLUMNS } from "@/constants/tableColumns";
 
 export default function EmissionFactorsPage() {
   const [factors, setFactors] = useState<EmissionFactor[]>([]);
@@ -25,8 +27,8 @@ export default function EmissionFactorsPage() {
     fetchFactors();
   }, []);
 
+  // 활성화된 버전으로 필터
   const activeFactors = factors.filter((f) => f.isActive);
-  const inactiveFactors = factors.filter((f) => !f.isActive);
 
   return (
     <div className="p-8">
@@ -45,31 +47,21 @@ export default function EmissionFactorsPage() {
         </div>
       )}
 
-      {/* 현재 유효한 배출계수 */}
+      {/* 현재 배출계수 */}
       <div className="card overflow-hidden mb-6">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
           <h3 className="font-semibold text-slate-900">현재 유효한 배출계수</h3>
-          <span className="text-xs px-2 py-1 rounded-full font-medium bg-green-50 text-green-600">
-            활성화
-          </span>
         </div>
         <div className="overflow-x-auto overflow-y-auto max-h-[60vh]">
           <table className="w-full min-w-150 text-sm">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-100">
-                {[
-                  "유형",
-                  "설명",
-                  "배출계수",
-                  "단위",
-                  "버전",
-                  "적용 시작일",
-                ].map((h) => (
+                {EMISSION_FACTOR_COLUMNS.map((col) => (
                   <th
-                    key={h}
+                    key={col.key}
                     className="px-5 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider"
                   >
-                    {h}
+                    {col.label}
                   </th>
                 ))}
               </tr>
@@ -85,100 +77,46 @@ export default function EmissionFactorsPage() {
                       ))}
                     </tr>
                   ))
-                : activeFactors.map((f) => (
-                    <tr
-                      key={f.id}
-                      className="border-b border-slate-100 hover:bg-slate-50 transition-colors"
-                    >
-                      <td className="px-5 py-4">
-                        <span className="text-xs font-medium px-2 py-1 rounded-full bg-[#e8f0f9] text-[#08428C]">
-                          {f.type}
-                        </span>
-                      </td>
-                      <td className="px-5 py-4 font-medium text-slate-900">
-                        {f.description}
-                      </td>
-                      <td className="px-5 py-4 font-bold text-[#08428C]">
-                        {f.emissionFactor}
-                      </td>
-                      <td className="px-5 py-4 text-slate-400">{f.unit}</td>
-                      <td className="px-5 py-4">
-                        <span className="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-500">
-                          v{f.version}
-                        </span>
-                      </td>
-                      <td className="px-5 py-4 text-xs text-slate-400">
-                        {f.validFrom.slice(0, 10)}
-                      </td>
-                    </tr>
-                  ))}
+                : activeFactors.map((f) => {
+                    const badge = TYPE_BADGE[f.type as EmissionType] ?? {
+                      bg: "bg-slate-100",
+                      text: "text-slate-500",
+                    };
+
+                    return (
+                      <tr
+                        key={f.id}
+                        className="border-b border-slate-100 hover:bg-slate-50 transition-colors"
+                      >
+                        <td className="px-5 py-4">
+                          <span
+                            className={`text-xs px-2 py-1 rounded-full font-medium ${badge.bg} ${badge.text}`}
+                          >
+                            {f.type}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 font-medium text-slate-900">
+                          {f.description}
+                        </td>
+                        <td className="px-5 py-4 font-bold text-[#08428C]">
+                          {f.emissionFactor}
+                        </td>
+                        <td className="px-5 py-4 text-slate-400">{f.unit}</td>
+                        <td className="px-5 py-4">
+                          <span className="text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-500">
+                            v{f.version}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 text-xs text-slate-400">
+                          {f.validFrom.slice(0, 10)}
+                        </td>
+                      </tr>
+                    );
+                  })}
             </tbody>
           </table>
         </div>
       </div>
-
-      {/* 버전 이력 */}
-      {inactiveFactors.length > 0 && (
-        <div className="card overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-            <h3 className="font-semibold text-slate-900">버전 이력</h3>
-            <span className="text-xs px-2 py-1 rounded-full font-medium bg-slate-100 text-slate-500">
-              Archived
-            </span>
-          </div>
-          <div className="overflow-x-auto overflow-y-auto max-h-[60vh]">
-            <table className="w-full min-w-150 text-sm">
-              <thead>
-                <tr className="bg-slate-50 border-b border-slate-100">
-                  {[
-                    "유형",
-                    "설명",
-                    "배출계수",
-                    "단위",
-                    "버전",
-                    "적용 기간",
-                  ].map((h) => (
-                    <th
-                      key={h}
-                      className="px-5 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider"
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {inactiveFactors.map((f) => (
-                  <tr
-                    key={f.id}
-                    className="border-b border-slate-100 opacity-60"
-                  >
-                    <td className="px-5 py-3 text-xs text-slate-400">
-                      {f.type}
-                    </td>
-                    <td className="px-5 py-3 text-slate-500">
-                      {f.description}
-                    </td>
-                    <td className="px-5 py-3 line-through text-slate-400">
-                      {f.emissionFactor}
-                    </td>
-                    <td className="px-5 py-3 text-xs text-slate-400">
-                      {f.unit}
-                    </td>
-                    <td className="px-5 py-3 text-xs text-slate-400">
-                      v{f.version}
-                    </td>
-                    <td className="px-5 py-3 text-xs text-slate-400">
-                      {f.validFrom.slice(0, 10)} ~{" "}
-                      {f.validTo?.slice(0, 10) ?? "현재"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

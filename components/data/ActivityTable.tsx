@@ -4,13 +4,8 @@ import { useState } from "react";
 import { ActivityData, EmissionType } from "@/types";
 import { Trash2 } from "lucide-react";
 import TableSkeleton from "./skeleton/TableSkeleton";
-
-// 유형별 배지 스타일
-const TYPE_BADGE: Record<EmissionType, { bg: string; text: string }> = {
-  전기: { bg: "bg-[#e8f0f9]", text: "text-[#08428C]" },
-  원소재: { bg: "bg-[#edf6fd]", text: "text-[#2995D9]" },
-  운송: { bg: "bg-[#f0faff]", text: "text-[#79CFF2]" },
-};
+import { TYPE_BADGE } from "@/constants/colors";
+import { ACTIVITY_TABLE_COLUMNS } from "@/constants/tableColumns";
 
 interface ActivityTableProps {
   activities: ActivityData[];
@@ -49,12 +44,12 @@ export default function ActivityTable({
         <table className="w-full min-w-150 text-sm">
           <thead>
             <tr className="bg-slate-50 border-b border-slate-100">
-              {["날짜", "유형", "설명", "수량", "단위", ""].map((h) => (
+              {ACTIVITY_TABLE_COLUMNS.map((col) => (
                 <th
-                  key={h}
+                  key={col.key}
                   className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider"
                 >
-                  {h}
+                  {col.label}
                 </th>
               ))}
             </tr>
