@@ -53,7 +53,7 @@ export default function EmissionFactorsPage() {
             활성화
           </span>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-auto max-h-[60vh]">
           <table className="w-full min-w-150 text-sm">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-100">
@@ -126,8 +126,8 @@ export default function EmissionFactorsPage() {
               Archived
             </span>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto overflow-y-auto max-h-[60vh]">
+            <table className="w-full min-w-150 text-sm">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-100">
                   {[

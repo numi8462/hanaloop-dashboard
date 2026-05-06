@@ -52,7 +52,7 @@ export default function DataPage() {
         {/* 모바일에서만 보이는 토글 버튼 */}
         <button
           onClick={() => setIsFormOpen((prev) => !prev)}
-          className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-[#08428C] hover:bg-[#05285a] transition-colors"
+          className="lg:hidden fixed top-4 right-4 z-10 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-white bg-[#08428C] hover:bg-[#05285a] transition-colors shadow-sm"
         >
           {isFormOpen ? <X size={16} /> : <Plus size={16} />}
           {isFormOpen ? "닫기" : "데이터 추가"}

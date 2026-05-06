@@ -35,7 +35,7 @@ export default function ActivityTable({
   }
 
   return (
-    <div className="card overflow-hidden">
+    <div className="card overflow-hidden min-w-0">
       {/* 헤더 */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
         <h3 className="text-base font-semibold text-slate-900">
@@ -45,7 +45,7 @@ export default function ActivityTable({
       </div>
 
       {/* 테이블 */}
-      <div className="overflow-x-auto overflow-y-auto max-h-150">
+      <div className="overflow-x-auto overflow-y-auto max-h-[60vh]">
         <table className="w-full min-w-150 text-sm">
           <thead>
             <tr className="bg-slate-50 border-b border-slate-100">

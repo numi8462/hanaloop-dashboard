@@ -20,10 +20,10 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
         />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <div className="flex min-h-screen">
           <Sidebar />
-          <main className="flex-1 min-h-screen bg-[#f8fafc] lg:ml-60 pt-14 lg:pt-0">
+          <main className="flex-1 min-w-0 overflow-x-hidden min-h-screen bg-[#f8fafc] lg:ml-60 pt-14 lg:pt-0">
             {children}
           </main>
         </div>
