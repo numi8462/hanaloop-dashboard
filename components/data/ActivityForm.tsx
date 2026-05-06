@@ -165,7 +165,7 @@ export default function ActivityForm({
             >
               <SelectValue placeholder="유형 선택" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent position="popper" align="start">
               {EMISSION_TYPES.map((t) => (
                 <SelectItem key={t} value={t}>
                   {t}
@@ -198,7 +198,7 @@ export default function ActivityForm({
             >
               <SelectValue placeholder="설명 선택" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent position="popper" align="start">
               {form.type &&
                 DESCRIPTION_MAP[form.type as EmissionType].map((d) => (
                   <SelectItem key={d} value={d}>
