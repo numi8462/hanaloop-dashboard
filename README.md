@@ -6,6 +6,34 @@
 
 ---
 
+## 스크린샷
+
+### 대시보드
+
+![대시보드](screenshots/s1.png)
+
+### 데이터 관리
+
+![데이터 관리](screenshots/s2.png)
+
+### 배출계수 관리
+
+![배출계수 관리](screenshots/s3.png)
+
+### 에러 메시지
+
+![에러 메시지](screenshots/s4.png)
+
+### 모바일
+
+![모바일](screenshots/s5.png)
+
+## 데모 영상
+
+https://github.com/YOUR_USERNAME/hanaloop-dashboard/raw/main/screenshots/dashboard-demo.mp4
+
+---
+
 ## 실행 방법
 
 Docker만 있으면 바로 실행할 수 있습니다.
