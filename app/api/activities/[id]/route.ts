@@ -1,38 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbUpdateEmissionFactor } from "@/lib/db";
-import { z } from "zod";
+import { dbDeleteActivity, dbUpdateActivity } from "@/lib/db";
 
-const EmissionFactorUpdateSchema = z.object({
-  emissionFactor: z
-    .number({ error: "숫자를 입력해주세요." })
-    .positive("0보다 큰 값을 입력해주세요."),
-});
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const { id } = await params;
+    await dbDeleteActivity(id);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("[DELETE /api/activities/:id]", error);
+    const message =
+      error instanceof Error ? error.message : "삭제에 실패했습니다.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const parsed = EmissionFactorUpdateSchema.safeParse(body);
-
-    if (!parsed.success) {
-      return NextResponse.json(
-        {
-          error: "입력 데이터가 유효하지 않습니다.",
-          details: parsed.error.issues,
-        },
-        { status: 400 },
-      );
-    }
-
-    const updated = await dbUpdateEmissionFactor(
-      params.id,
-      parsed.data.emissionFactor,
-    );
+    const updated = await dbUpdateActivity(id, body);
     return NextResponse.json({ data: updated });
   } catch (error) {
-    console.error("[PATCH /api/emission-factors/:id]", error);
+    console.error("[PATCH /api/activities/:id]", error);
     const message =
       error instanceof Error ? error.message : "수정에 실패했습니다.";
     return NextResponse.json({ error: message }, { status: 500 });

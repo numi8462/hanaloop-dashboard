@@ -2,8 +2,8 @@ import { create } from "zustand";
 import { ActivityData, ActivityInput } from "@/types";
 import {
   getActivities,
-  createActivity as apiCreateActivity,
-  deleteActivity as apiDeleteActivity,
+  createActivity,
+  deleteActivity,
 } from "@/services/activityService";
 
 interface ActivityState {
@@ -45,7 +45,7 @@ export const useActivityStore = create<ActivityState>((set) => ({
   createActivity: async (input) => {
     set({ isSaving: true, saveError: null, successMessage: null });
     try {
-      const activity = await apiCreateActivity(input);
+      const activity = await createActivity(input);
       // 새로 추가된 데이터를 목록 맨 앞에 삽입
       set((state) => ({
         activities: [activity, ...state.activities],
@@ -65,7 +65,7 @@ export const useActivityStore = create<ActivityState>((set) => ({
   deleteActivity: async (id) => {
     set({ isSaving: true, saveError: null, successMessage: null });
     try {
-      await apiDeleteActivity(id);
+      await deleteActivity(id);
       // 삭제된 데이터를 목록에서 제거
       set((state) => ({
         activities: state.activities.filter((a) => a.id !== id),
