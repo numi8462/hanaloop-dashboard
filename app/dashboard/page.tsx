@@ -19,7 +19,7 @@ export default function DashboardPage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h1 className="text-2xl font-bold tracking-tight text-white">
           대시보드
         </h1>
         <p className="text-sm mt-1 text-slate-400">탄소 발자국</p>
@@ -27,8 +27,8 @@ export default function DashboardPage() {
 
       {/* 에러 */}
       {error && (
-        <div className="flex items-center gap-2 px-4 py-3 rounded-lg mb-6 text-sm bg-red-50 border border-red-200 text-red-600">
-          데이터를 불러오는 중 오류가 발생했습니다: {error}
+        <div className="flex items-center gap-2 px-4 py-3 rounded-lg mb-6 text-sm bg-red-500/10 border border-red-500/30 text-red-400">
+          <span>데이터를 불러오는 중 오류가 발생했습니다: {error}</span>
         </div>
       )}
 

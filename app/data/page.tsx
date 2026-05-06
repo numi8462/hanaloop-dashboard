@@ -42,7 +42,7 @@ export default function DataPage() {
       {/* 헤더 */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-100">
             데이터 관리
           </h1>
           <p className="text-sm mt-1 text-slate-400">

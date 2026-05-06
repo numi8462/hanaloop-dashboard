@@ -83,7 +83,7 @@ function CustomLegend({ payload }: CustomLegendProps) {
             className="rounded-full w-2 h-2"
             style={{ background: entry.color }}
           />
-          <span className="text-xs text-slate-500">{entry.value}</span>
+          <span className="text-xs text-slate-300">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -123,18 +123,18 @@ export default function MonthlyTrendChart({
     <div className="card p-5">
       {/* 헤더 */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-semibold text-slate-900">
+        <h3 className="text-sm font-semibold text-slate-300">
           월별 배출량 추이
         </h3>
         <div className="flex items-center gap-2">
           {/* 토글 버튼 */}
-          <div className="flex rounded-lg overflow-hidden border border-slate-200 text-xs">
+          <div className="flex rounded-lg overflow-hidden text-xs">
             <button
               onClick={() => handleModeChange("stack")}
               className={`px-3 py-1.5 font-medium transition-colors ${
                 mode === "stack"
                   ? "bg-slate-900 text-white"
-                  : "bg-white text-slate-500 hover:bg-slate-50"
+                  : "bg-white text-slate-500"
               }`}
             >
               누적
@@ -144,13 +144,13 @@ export default function MonthlyTrendChart({
               className={`px-3 py-1.5 font-medium transition-colors ${
                 mode === "group"
                   ? "bg-slate-900 text-white"
-                  : "bg-white text-slate-500 hover:bg-slate-50"
+                  : "bg-white text-slate-500"
               }`}
             >
               그룹
             </button>
           </div>
-          <span className="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded-full">
+          <span className="text-xs text-slate-900 bg-slate-100 px-2 py-1 rounded-full">
             kgCO₂e
           </span>
         </div>
@@ -175,11 +175,7 @@ export default function MonthlyTrendChart({
             tickLine={false}
             width={45}
           />
-          <Tooltip
-            content={<CustomTooltip />}
-            isAnimationActive={false}
-            cursor={{ fill: "#f8fafc" }}
-          />
+          <Tooltip content={<CustomTooltip />} isAnimationActive={false} />
           <Legend content={<CustomLegend />} />
 
           {mode === "stack" ? (

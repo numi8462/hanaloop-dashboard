@@ -52,7 +52,7 @@ function CustomLegend({ payload }: CustomLegendProps) {
             className="rounded-full w-2 h-2"
             style={{ background: entry.color }}
           />
-          <span className="text-xs text-slate-500">{entry.value}</span>
+          <span className="text-xs text-slate-300">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -79,7 +79,7 @@ export default function CategoryChart({
 
   return (
     <div className="card p-5">
-      <h3 className="text-sm font-semibold text-slate-900 mb-4">
+      <h3 className="text-sm font-semibold text-slate-300 mb-4">
         카테고리별 배출 비율
       </h3>
       <ResponsiveContainer width="100%" height={250}>

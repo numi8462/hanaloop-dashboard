@@ -32,22 +32,22 @@ export default function ActivityTable({
   return (
     <div className="card overflow-hidden min-w-0">
       {/* 헤더 */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-        <h3 className="text-base font-semibold text-slate-900">
+      <div className="flex items-center justify-between px-6 py-4">
+        <h3 className="text-base font-semibold text-slate-100">
           활동 데이터 목록
         </h3>
-        <span className="text-sm text-slate-400">총 {activities.length}건</span>
+        <span className="text-sm text-slate-100">총 {activities.length}건</span>
       </div>
 
       {/* 테이블 */}
-      <div className="overflow-x-auto overflow-y-auto max-h-[60vh]">
+      <div className="overflow-x-auto overflow-y-auto max-h-[60vh] custom-scrollbar">
         <table className="w-full min-w-150 text-sm">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-100">
+            <tr className="bg-(--color-hover)">
               {ACTIVITY_TABLE_COLUMNS.map((col) => (
                 <th
                   key={col.key}
-                  className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider"
+                  className="px-4 py-3 text-left text-xs font-semibold text-slate-300 tracking-wider"
                 >
                   {col.label}
                 </th>
@@ -76,9 +76,9 @@ export default function ActivityTable({
                 return (
                   <tr
                     key={activity.id}
-                    className="border-b border-slate-100 hover:bg-slate-50 transition-colors"
+                    className="border-b border-(--color-hover) hover:bg-(--color-hover) transition-colors"
                   >
-                    <td className="px-4 py-3 text-slate-400">
+                    <td className="px-4 py-3 text-slate-300">
                       {activity.date.slice(0, 10)}
                     </td>
                     <td className="px-4 py-3">
@@ -88,10 +88,10 @@ export default function ActivityTable({
                         {activity.type}
                       </span>
                     </td>
-                    <td className="px-4 py-3 font-medium text-slate-900">
+                    <td className="px-4 py-3 font-medium text-slate-100">
                       {activity.description}
                     </td>
-                    <td className="px-4 py-3 text-slate-900">
+                    <td className="px-4 py-3 text-slate-100">
                       {activity.amount.toLocaleString("ko-KR")}
                     </td>
                     <td className="px-4 py-3 text-slate-400">

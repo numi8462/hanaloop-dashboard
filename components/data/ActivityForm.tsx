@@ -19,7 +19,6 @@ const DESCRIPTION_MAP: Record<EmissionType, string[]> = {
 
 const EMISSION_TYPES: EmissionType[] = ["전기", "원소재", "운송"];
 
-// 폼 에러 타입
 interface FormErrors {
   date?: string;
   type?: string;
@@ -48,10 +47,10 @@ export default function ActivityForm({
     description: "",
     amount: "",
   });
+
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  // 유효성 검증
   function validate(): FormErrors {
     const newErrors: FormErrors = {};
     if (!form.date) newErrors.date = "날짜를 입력해주세요.";
@@ -67,7 +66,6 @@ export default function ActivityForm({
 
   function handleChange(field: string, value: string) {
     if (field === "type") {
-      // 유형 변경 시 description 자동 설정
       const descriptions = DESCRIPTION_MAP[value as EmissionType] ?? [];
       setForm((prev) => ({
         ...prev,
@@ -81,6 +79,7 @@ export default function ActivityForm({
     if (touched[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
+
     onClearMessages();
   }
 
@@ -96,6 +95,7 @@ export default function ActivityForm({
   async function handleSubmit() {
     setTouched({ date: true, type: true, description: true, amount: true });
     const newErrors = validate();
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -110,6 +110,7 @@ export default function ActivityForm({
     };
 
     const success = await onSubmit(input);
+
     if (success) {
       setForm({
         date: new Date().toISOString().slice(0, 10),
@@ -124,48 +125,44 @@ export default function ActivityForm({
 
   return (
     <div className="card p-6">
-      <h3 className="text-base font-semibold text-slate-900 mb-5">
+      <h3 className="text-base font-semibold text-slate-100 mb-5">
         활동 데이터 추가
       </h3>
 
       <div className="flex flex-col gap-4">
         {/* 날짜 */}
         <div>
-          <label className="block text-sm font-medium text-slate-600 mb-1.5">
-            날짜 <span className="text-red-500">*</span>
+          <label className="text-sm text-slate-300 mb-1.5 block">
+            날짜 <span className="text-red-400">*</span>
           </label>
           <Input
             type="date"
             value={form.date}
             onChange={(e) => handleChange("date", e.target.value)}
             onBlur={() => handleBlur("date")}
-            className={
-              errors.date && touched.date ? "border-red-300 bg-red-50" : ""
-            }
+            aria-invalid={!!(errors.date && touched.date)}
           />
           {errors.date && touched.date && (
-            <p className="mt-1 text-xs text-red-500">{errors.date}</p>
+            <p className="mt-1 text-xs text-red-400">{errors.date}</p>
           )}
         </div>
 
         {/* 유형 */}
         <div>
-          <label className="block text-sm font-medium text-slate-600 mb-1.5">
-            유형 <span className="text-red-500">*</span>
+          <label className="text-sm text-slate-300 mb-1.5 block">
+            유형 <span className="text-red-400">*</span>
           </label>
           <Select
             value={form.type}
             onValueChange={(value) => handleChange("type", value)}
           >
             <SelectTrigger
-              className={
-                errors.type && touched.type ? "border-red-300 bg-red-50" : ""
-              }
               onBlur={() => handleBlur("type")}
+              aria-invalid={!!(errors.type && touched.type)}
             >
               <SelectValue placeholder="유형 선택" />
             </SelectTrigger>
-            <SelectContent position="popper" align="start">
+            <SelectContent>
               {EMISSION_TYPES.map((t) => (
                 <SelectItem key={t} value={t}>
                   {t}
@@ -174,14 +171,14 @@ export default function ActivityForm({
             </SelectContent>
           </Select>
           {errors.type && touched.type && (
-            <p className="mt-1 text-xs text-red-500">{errors.type}</p>
+            <p className="mt-1 text-xs text-red-400">{errors.type}</p>
           )}
         </div>
 
         {/* 설명 */}
         <div>
-          <label className="block text-sm font-medium text-slate-600 mb-1.5">
-            설명 <span className="text-red-500">*</span>
+          <label className="text-sm text-slate-300 mb-1.5 block">
+            설명 <span className="text-red-400">*</span>
           </label>
           <Select
             value={form.description}
@@ -189,18 +186,14 @@ export default function ActivityForm({
             disabled={!form.type}
           >
             <SelectTrigger
-              className={
-                errors.description && touched.description
-                  ? "border-red-300 bg-red-50"
-                  : ""
-              }
               onBlur={() => handleBlur("description")}
+              aria-invalid={!!(errors.description && touched.description)}
             >
               <SelectValue placeholder="설명 선택" />
             </SelectTrigger>
-            <SelectContent position="popper" align="start">
+            <SelectContent>
               {form.type &&
-                DESCRIPTION_MAP[form.type as EmissionType].map((d) => (
+                DESCRIPTION_MAP[form.type].map((d) => (
                   <SelectItem key={d} value={d}>
                     {d}
                   </SelectItem>
@@ -208,66 +201,57 @@ export default function ActivityForm({
             </SelectContent>
           </Select>
           {errors.description && touched.description && (
-            <p className="mt-1 text-xs text-red-500">{errors.description}</p>
+            <p className="mt-1 text-xs text-red-400">{errors.description}</p>
           )}
         </div>
 
         {/* 수량 + 단위 */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-slate-600 mb-1.5">
-              수량 <span className="text-red-500">*</span>
+            <label className="text-sm text-slate-300 mb-1.5 block">
+              수량 <span className="text-red-400">*</span>
             </label>
             <Input
               type="number"
-              min="0"
-              step="0.01"
               value={form.amount}
               onChange={(e) => handleChange("amount", e.target.value)}
               onBlur={() => handleBlur("amount")}
-              placeholder="0"
-              className={
-                errors.amount && touched.amount
-                  ? "border-red-300 bg-red-50"
-                  : ""
-              }
+              aria-invalid={!!(errors.amount && touched.amount)}
             />
             {errors.amount && touched.amount && (
-              <p className="mt-1 text-xs text-red-500">{errors.amount}</p>
+              <p className="mt-1 text-xs text-red-400">{errors.amount}</p>
             )}
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-slate-600 mb-1.5">
-              단위
-            </label>
+            <label className="text-sm text-slate-300 mb-1.5 block">단위</label>
             <Input
-              value={form.type ? UNIT_MAP[form.type as EmissionType] : ""}
+              value={form.type ? UNIT_MAP[form.type] : ""}
+              placeholder="설정 시 자동 적용"
               readOnly
-              placeholder="선택 시 자동 설정"
-              className="bg-slate-100 text-slate-500 cursor-not-allowed"
             />
           </div>
         </div>
 
         {/* 에러 메시지 */}
         {saveError && (
-          <div className="px-3 py-2.5 rounded-lg text-sm bg-red-50 border border-red-200 text-red-600">
+          <div className="px-3 py-2.5 rounded-lg text-sm bg-red-500/10 border border-red-500/30 text-red-400">
             {saveError}
           </div>
         )}
 
         {/* 성공 메시지 */}
         {successMessage && (
-          <div className="px-3 py-2.5 rounded-lg text-sm bg-green-50 border border-green-200 text-green-600">
+          <div className="px-3 py-2.5 rounded-lg text-sm bg-green-500/10 border border-green-500/30 text-green-400">
             {successMessage}
           </div>
         )}
 
-        {/* 제출 버튼 */}
+        {/* 버튼 */}
         <button
           onClick={handleSubmit}
           disabled={isSaving}
-          className="w-full py-2.5 rounded-lg text-sm font-semibold text-white bg-[#08428C] hover:bg-[#05285a] disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+          className="w-full py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-600 transition-colors"
         >
           {isSaving ? "저장 중..." : "데이터 추가"}
         </button>

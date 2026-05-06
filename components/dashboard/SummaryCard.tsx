@@ -26,15 +26,11 @@ export default function SummaryCard({
       {/* 상단: 라벨 + 아이콘 */}
       <div className="flex items-start justify-between mb-3 h-12 min-w-0">
         <div className="min-w-0 flex-1 mr-2">
-          <p className="text-sm font-semibold text-slate-500 truncate">
+          <p className="text-sm font-semibold text-slate-100 truncate">
             {label}
           </p>
           {scope && (
-            <span
-              className={`text-xs px-1.5 py-1 rounded-2xl font-medium mt-1 inline-flex items-center justify-center ${
-                scope === "스코프 2" ? "badge-scope2" : "badge-scope3"
-              }`}
-            >
+            <span className="text-xs font-medium inline-flex items-center justify-center text-slate-300">
               {scope}
             </span>
           )}
@@ -48,17 +44,17 @@ export default function SummaryCard({
 
       {/* 수치 */}
       <div className="flex items-baseline gap-1.5 min-w-0">
-        <span className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-900 truncate">
+        <span className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-100 truncate">
           {value}
         </span>
-        <span className="text-xs lg:text-sm font-medium text-slate-400 shrink-0">
+        <span className="text-xs lg:text-sm font-medium text-slate-300 shrink-0">
           {unit}
         </span>
       </div>
 
       {/* 비율 */}
       {percentage != null && percentage > 0 && (
-        <p className="text-xs mt-2 text-slate-400">
+        <p className="text-xs mt-2 text-slate-300">
           전체의{" "}
           <span className={`font-semibold ${iconColor}`}>{percentage}%</span>
         </p>
