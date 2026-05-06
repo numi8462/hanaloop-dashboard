@@ -4,7 +4,6 @@ import { Zap, Package, Truck, Leaf } from "lucide-react";
 import SummaryCard from "./SummaryCard";
 import { CardSkeleton } from "./skeleton/CardSkeleton";
 import { formatCo2e } from "@/lib/pcf-calculator";
-import { CATEGORY_COLORS } from "@/constants/colors";
 
 interface CategorySummary {
   type: string;
