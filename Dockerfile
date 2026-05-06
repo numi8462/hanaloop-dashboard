@@ -4,6 +4,8 @@ RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
+COPY prisma ./prisma
+
 RUN npm ci
 
 # ─── Stage 2: builder ─────────────────────────────────────────
@@ -16,6 +18,15 @@ COPY . .
 
 RUN npx prisma generate
 RUN npm run build
+
+# 시드 파일 + seed-data 컴파일
+RUN npx tsc prisma/seed.ts lib/seed-data.ts \
+  --outDir prisma/dist \
+  --module commonjs \
+  --target es2017 \
+  --esModuleInterop true \
+  --skipLibCheck true \
+  --moduleResolution node 2>/dev/null || true
 
 # ─── Stage 3: runner ──────────────────────────────────────────
 FROM node:20-alpine AS runner
@@ -34,6 +45,8 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/node_modules/.bin/prisma ./node_modules/.bin/prisma
 
 COPY docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
