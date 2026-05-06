@@ -20,14 +20,6 @@
 
 ![배출계수 관리](screenshots/s3.png)
 
-### 에러 메시지
-
-![에러 메시지](screenshots/s4.png)
-
-### 모바일
-
-![모바일](screenshots/s5.png)
-
 ## 데모 영상
 
 https://github.com/numi8462/hanaloop-dashboard/raw/main/screenshots/dashboard-demo.mp4
