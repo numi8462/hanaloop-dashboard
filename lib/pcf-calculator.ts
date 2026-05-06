@@ -149,19 +149,8 @@ export function buildDashboardSummary(results: PcfResult[]): DashboardSummary {
 
 /**
  * CO₂e 값을 읽기 좋은 형태로 포맷
- * 1000 kgCO₂e 이상이면 tCO₂e로 자동 변환
- * 예: 50.16 → { value: "50.16", unit: "kgCO₂e" }
- * 예: 5016  → { value: "5.02",  unit: "tCO₂e"  }
  */
 export function formatCo2e(kgCo2e: number): { value: string; unit: string } {
-  if (kgCo2e >= 1000) {
-    return {
-      value: kgToTon(kgCo2e).toLocaleString("ko-KR", {
-        maximumFractionDigits: 2,
-      }),
-      unit: "tCO₂e",
-    };
-  }
   return {
     value: kgCo2e.toLocaleString("ko-KR", { maximumFractionDigits: 2 }),
     unit: "kgCO₂e",
