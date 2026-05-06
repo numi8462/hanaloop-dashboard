@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityData, ActivityInput, EmissionType, UNIT_MAP } from "@/types";
 import { Input } from "@/components/ui/input";
 import {
@@ -57,6 +57,14 @@ export default function ActivityForm({
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  // 성공/실패 메시지 4초 후 자동 제거
+  useEffect(() => {
+    if (saveError || successMessage) {
+      const timer = setTimeout(onClearMessages, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [saveError, successMessage, onClearMessages]);
 
   function validate(): FormErrors {
     const newErrors: FormErrors = {};
