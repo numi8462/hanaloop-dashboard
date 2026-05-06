@@ -45,7 +45,7 @@ export default function ActivityTable({
       </div>
 
       {/* 테이블 */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overflow-y-auto max-h-150">
         <table className="w-full min-w-150 text-sm">
           <thead>
             <tr className="bg-slate-50 border-b border-slate-100">
