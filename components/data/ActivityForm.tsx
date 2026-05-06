@@ -243,7 +243,7 @@ export default function ActivityForm({
             <Input
               value={form.type ? UNIT_MAP[form.type as EmissionType] : ""}
               readOnly
-              placeholder="유형 선택 시 자동 설정"
+              placeholder="선택 시 자동 설정"
               className="bg-slate-100 text-slate-500 cursor-not-allowed"
             />
           </div>
