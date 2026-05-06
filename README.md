@@ -30,7 +30,7 @@
 
 ## 데모 영상
 
-https://github.com/YOUR_USERNAME/hanaloop-dashboard/raw/main/screenshots/dashboard-demo.mp4
+https://github.com/numi8462/hanaloop-dashboard/raw/main/screenshots/dashboard-demo.mp4
 
 ---
 
