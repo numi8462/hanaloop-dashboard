@@ -41,34 +41,3 @@ export async function dbGetActiveEmissionFactors(): Promise<EmissionFactor[]> {
   });
   return rows.map(toEmissionFactor);
 }
-
-export async function dbUpdateEmissionFactor(
-  id: string,
-  newFactor: number,
-): Promise<EmissionFactor> {
-  const existing = await prisma.emissionFactor.findUnique({ where: { id } });
-  if (!existing) throw new Error(`배출계수(${id})를 찾을 수 없습니다.`);
-
-  const now = new Date();
-
-  const [, newVersion] = await prisma.$transaction([
-    prisma.emissionFactor.update({
-      where: { id },
-      data: { isActive: false, validTo: now },
-    }),
-    prisma.emissionFactor.create({
-      data: {
-        type: existing.type,
-        description: existing.description,
-        emissionFactor: newFactor,
-        unit: existing.unit,
-        version: existing.version + 1,
-        isActive: true,
-        validFrom: now,
-        validTo: null,
-      },
-    }),
-  ]);
-
-  return toEmissionFactor(newVersion);
-}

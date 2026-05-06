@@ -7,11 +7,3 @@ export async function getEmissionFactors(): Promise<EmissionFactor[]> {
   const json = await res.json();
   return json.data;
 }
-
-/** 현재 유효한 배출계수만 조회 */
-export async function getActiveEmissionFactors(): Promise<EmissionFactor[]> {
-  const res = await fetch("/api/emission-factors?active=true");
-  if (!res.ok) throw new Error("데이터를 불러오지 못했습니다.");
-  const json = await res.json();
-  return json.data;
-}
