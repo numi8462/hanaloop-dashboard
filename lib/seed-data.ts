@@ -1,4 +1,4 @@
-import { ActivityData, EmissionFactor } from "@/types";
+import { ActivityData, EmissionFactor } from "../types";
 
 export const SEED_ACTIVITIES: Omit<
   ActivityData,

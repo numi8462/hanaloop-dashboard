@@ -10,7 +10,12 @@ async function main() {
   if (factorCount === 0) {
     await prisma.emissionFactor.createMany({
       data: SEED_EMISSION_FACTORS.map((f) => ({
-        ...f,
+        type: f.type,
+        description: f.description,
+        emissionFactor: f.emissionFactor,
+        unit: f.unit,
+        version: f.version,
+        isActive: f.isActive,
         validFrom: new Date(f.validFrom),
         validTo: f.validTo ? new Date(f.validTo) : null,
       })),
@@ -24,8 +29,11 @@ async function main() {
   if (activityCount === 0) {
     await prisma.activityData.createMany({
       data: SEED_ACTIVITIES.map((a) => ({
-        ...a,
         date: new Date(a.date),
+        type: a.type,
+        description: a.description,
+        amount: a.amount,
+        unit: a.unit,
       })),
     });
     console.log(`활동 데이터 ${SEED_ACTIVITIES.length}건 삽입 완료`);
