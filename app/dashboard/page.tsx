@@ -43,7 +43,12 @@ export default function DashboardPage() {
       {/* 탄소 비용 + 카테고리 차트 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
         <CategoryChart byCategory={byCategory} isLoading={isLoading} />
-        <CarbonCostCard totalCo2e={totalCo2e} isLoading={isLoading} />
+        <CarbonCostCard
+          totalCo2e={totalCo2e}
+          byCategory={byCategory}
+          byMonth={byMonth}
+          isLoading={isLoading}
+        />
       </div>
 
       {/* 월별 차트 */}
