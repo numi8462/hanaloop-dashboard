@@ -1,5 +1,6 @@
 "use client";
 
+import CarbonCostCard from "@/components/dashboard/CarbonCostCard";
 import CategoryChart from "@/components/dashboard/CategoryChart";
 import MonthlyTrendChart from "@/components/dashboard/MontlyTrendChart";
 import SummaryCards from "@/components/dashboard/SummaryCards";
@@ -39,14 +40,15 @@ export default function DashboardPage() {
         isLoading={isLoading}
       />
 
-      {/* 차트 */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-6">
-        <div className="lg:col-span-1">
-          <CategoryChart byCategory={byCategory} isLoading={isLoading} />
-        </div>
-        <div className="lg:col-span-3">
-          <MonthlyTrendChart byMonth={byMonth} isLoading={isLoading} />
-        </div>
+      {/* 탄소 비용 + 카테고리 차트 */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+        <CategoryChart byCategory={byCategory} isLoading={isLoading} />
+        <CarbonCostCard totalCo2e={totalCo2e} isLoading={isLoading} />
+      </div>
+
+      {/* 월별 차트 */}
+      <div className="mt-4">
+        <MonthlyTrendChart byMonth={byMonth} isLoading={isLoading} />
       </div>
     </div>
   );
