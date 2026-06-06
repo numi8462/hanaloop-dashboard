@@ -37,6 +37,7 @@ export default function DashboardPage() {
       <SummaryCards
         totalCo2e={totalCo2e}
         byCategory={byCategory}
+        byMonth={byMonth}
         isLoading={isLoading}
       />
 

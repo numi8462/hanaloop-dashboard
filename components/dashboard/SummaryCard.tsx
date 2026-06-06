@@ -9,6 +9,9 @@ interface SummaryCardProps {
   iconBg: string;
   percentage?: number;
   scope?: string;
+  monthlyChange?: number | null;
+  peakMonth?: string | null;
+  period?: string | null;
 }
 
 export default function SummaryCard({
@@ -20,6 +23,9 @@ export default function SummaryCard({
   iconBg,
   percentage,
   scope,
+  monthlyChange,
+  peakMonth,
+  period,
 }: SummaryCardProps) {
   return (
     <div className="card p-5">
@@ -59,6 +65,31 @@ export default function SummaryCard({
           <span className={`font-semibold ${iconColor}`}>{percentage}%</span>
         </p>
       )}
+
+      {/* 전월 대비 증감 */}
+      {monthlyChange !== null && monthlyChange !== undefined && (
+        <p className="text-xs mt-1">
+          {monthlyChange >= 0 ? (
+            <span className="text-red-400">
+              전월 대비 ▲ {Math.abs(monthlyChange).toFixed(1)}% 증가
+            </span>
+          ) : (
+            <span className="text-emerald-400">
+              전월 대비 ▼ {Math.abs(monthlyChange).toFixed(1)}% 감소
+            </span>
+          )}
+        </p>
+      )}
+
+      {/* 피크월 */}
+      {peakMonth && (
+        <p className="text-xs mt-1 text-slate-400">
+          피크: <span className="text-slate-300">{peakMonth}</span>
+        </p>
+      )}
+
+      {/* 데이터 기간 */}
+      {period && <p className="text-xs mt-1 text-slate-500">{period}</p>}
     </div>
   );
 }
