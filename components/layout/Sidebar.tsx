@@ -40,9 +40,8 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "목표관리",
-    href: "/forecast",
+    href: "/goals",
     icon: <TrendingUp size={18} />,
-    badge: "준비 중",
   },
   {
     label: "리포트",

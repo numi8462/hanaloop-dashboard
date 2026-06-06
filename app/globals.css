@@ -144,6 +144,15 @@
   input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1) brightness(0.8);
   }
+  /* number input 화살표 제거 */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
 
 /* ─── 카드 ───────────────────────────────────────────────────── */
