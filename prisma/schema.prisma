@@ -35,3 +35,13 @@ model EmissionFactor {
   @@index([type, description, isActive])
   @@map("emission_factors")
 }
+
+model Goal {
+  id          String   @id @default(cuid())
+  year        Int      @unique
+  targetCo2e  Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("goals")
+}

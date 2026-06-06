@@ -39,7 +39,7 @@ const NAV_ITEMS: NavItem[] = [
     icon: <Clock size={18} />,
   },
   {
-    label: "예측",
+    label: "목표관리",
     href: "/forecast",
     icon: <TrendingUp size={18} />,
     badge: "준비 중",
