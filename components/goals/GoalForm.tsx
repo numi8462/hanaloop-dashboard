@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { GoalData } from "@/lib/db/goals";
 
 interface GoalFormProps {
   totalCo2e: number;
   isSaving: boolean;
   saveError: string | null;
   successMessage: string | null;
+  editTarget?: GoalData | null;
   onSubmit: (year: number, targetCo2e: number) => Promise<boolean>;
+  onCancelEdit?: () => void;
   onClearMessages: () => void;
 }
 
@@ -17,11 +20,17 @@ export default function GoalForm({
   isSaving,
   saveError,
   successMessage,
+  editTarget,
   onSubmit,
+  onCancelEdit,
   onClearMessages,
 }: GoalFormProps) {
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [targetCo2e, setTargetCo2e] = useState("");
+  const [year, setYear] = useState(
+    editTarget?.year ?? new Date().getFullYear(),
+  );
+  const [targetCo2e, setTargetCo2e] = useState(
+    editTarget?.targetCo2e ? String(editTarget.targetCo2e) : "",
+  );
   const [errors, setErrors] = useState<{ year?: string; targetCo2e?: string }>(
     {},
   );
@@ -55,12 +64,15 @@ export default function GoalForm({
     if (success) {
       setTargetCo2e("");
       setErrors({});
+      onCancelEdit?.();
     }
   }
 
   return (
     <div className="card p-6 self-start sticky top-6">
-      <h3 className="text-base font-semibold text-slate-100 mb-5">목표 설정</h3>
+      <h3 className="text-base font-semibold text-slate-100 mb-5">
+        {editTarget ? "목표 수정" : "목표 설정"}
+      </h3>
       <div className="flex flex-col gap-4">
         {/* 연도 */}
         <div>
@@ -116,14 +128,26 @@ export default function GoalForm({
           </div>
         )}
 
-        {/* 저장 버튼 */}
-        <button
-          onClick={handleSubmit}
-          disabled={isSaving}
-          className="w-full py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors"
+        {/* 버튼 */}
+        <div
+          className={`grid gap-2 ${editTarget ? "grid-cols-2" : "grid-cols-1"}`}
         >
-          {isSaving ? "저장 중..." : "목표 저장"}
-        </button>
+          {editTarget && (
+            <button
+              onClick={onCancelEdit}
+              className="py-2.5 rounded-lg text-sm font-medium text-slate-400 bg-slate-700 hover:bg-slate-600 transition-colors"
+            >
+              취소
+            </button>
+          )}
+          <button
+            onClick={handleSubmit}
+            disabled={isSaving}
+            className="py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors"
+          >
+            {isSaving ? "저장 중..." : editTarget ? "수정 완료" : "목표 저장"}
+          </button>
+        </div>
       </div>
     </div>
   );
