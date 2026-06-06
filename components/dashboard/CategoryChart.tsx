@@ -78,7 +78,7 @@ export default function CategoryChart({
   }));
 
   return (
-    <div className="card p-5">
+    <div className="card p-5 h-60">
       <h3 className="text-sm font-semibold text-slate-300 mb-4">
         카테고리별 배출 비율
       </h3>
