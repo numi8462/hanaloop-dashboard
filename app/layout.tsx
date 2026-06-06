@@ -5,6 +5,9 @@ import Sidebar from "@/components/layout/Sidebar";
 export const metadata: Metadata = {
   title: "HanaLoop — PCF Dashboard",
   description: "제품 탄소 발자국(PCF) 관리 대시보드",
+  icons: {
+    icon: "/hanaloop-logo.png",
+  },
 };
 
 export default function RootLayout({
