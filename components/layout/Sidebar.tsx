@@ -47,7 +47,6 @@ const NAV_ITEMS: NavItem[] = [
     label: "리포트",
     href: "/report",
     icon: <FileText size={18} />,
-    badge: "준비 중",
   },
 ];
 
