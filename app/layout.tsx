@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
+import FloatingChat from "@/components/chat/FloatingChat";
 
 export const metadata: Metadata = {
   title: "HanaLoop — PCF Dashboard",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <main className="flex-1 min-w-0 overflow-x-hidden min-h-screen bg-(--color-bg) lg:ml-60 pt-14 lg:pt-0">
             {children}
           </main>
+          <FloatingChat />
         </div>
       </body>
     </html>
