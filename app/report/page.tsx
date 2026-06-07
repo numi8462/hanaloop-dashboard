@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useDashboardStore } from "@/store/dashboardStore";
 import {
   useCategorySummary,
   useMonthlySummary,
@@ -28,7 +27,12 @@ export default function ReportPage() {
     <div className="p-6 lg:p-8">
       {/* 헤더 */}
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-[#0d253d]" style={{ letterSpacing: "-0.64px" }}>보고서</h1>
+        <h1
+          className="text-2xl font-semibold text-[#0d253d]"
+          style={{ letterSpacing: "-0.64px" }}
+        >
+          보고서
+        </h1>
         <p className="text-sm mt-1 text-[#64748d]">
           PCF 데이터를 Excel 형식으로 다운로드합니다
         </p>
