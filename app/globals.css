@@ -82,16 +82,31 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --color-brand: #08428c;
-  --color-brand-light: #2995d9;
-  --color-brand-dark: #05285a;
-  --color-brand-subtle: #e8f0f9;
+  /* Design system — Stripe-inspired */
+  --color-primary: #533afd;
+  --color-primary-deep: #4434d4;
+  --color-primary-press: #2e2b8c;
+  --color-primary-soft: #665efd;
+  --color-primary-subdued: #b9b9f9;
+
+  --color-ink: #0d253d;
+  --color-ink-secondary: #273951;
+  --color-ink-mute: #64748d;
+
+  --color-hairline: #e3e8ee;
+  --color-hairline-input: #a8c3de;
+
   --color-electricity: #9f86ff;
   --color-material: #2995d9;
   --color-transport: #79cff2;
-  --color-bg: #2f323a;
-  --color-card-bg: #3a3f4b;
-  --color-hover: #444b58;
+
+  --color-bg: #f6f9fc;
+  --color-card-bg: #ffffff;
+  --color-hover: #f6f9fc;
+
+  /* legacy aliases kept for layout.tsx */
+  --color-brand: #533afd;
+  --color-brand-dark: #1c1e54;
 }
 
 .dark {
@@ -142,7 +157,8 @@
     cursor: pointer;
   }
   input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(0.8);
+    filter: opacity(0.4);
+    cursor: pointer;
   }
   /* number input 화살표 제거 */
   input[type="number"]::-webkit-inner-spin-button,
@@ -158,10 +174,9 @@
 /* ─── 카드 ───────────────────────────────────────────────────── */
 .card {
   background: var(--color-card-bg);
-  border-radius: 16px;
-  box-shadow:
-    0 1px 3px 0 rgb(0 0 0 / 0.08),
-    0 1px 2px -1px rgb(0 0 0 / 0.05);
+  border: 1px solid var(--color-hairline);
+  border-radius: 12px;
+  box-shadow: rgba(0, 55, 112, 0.08) 0 1px 3px;
   min-height: 160px;
 }
 
@@ -176,7 +191,7 @@
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #2f333d 25%, #3a3f4b 50%, #2f333d 75%);
+  background: linear-gradient(90deg, #edf2f8 25%, #f6f9fc 50%, #edf2f8 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
@@ -213,12 +228,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #444b58;
+  background-color: #c8d3e0;
   border-radius: 999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #555d6d;
+  background-color: #a8b8cc;
 }
 
 /* 화살표 제거 */
@@ -229,5 +244,11 @@
 /* Firefox */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #444b58 transparent;
+  scrollbar-color: #c8d3e0 transparent;
+}
+
+/* ─── 숫자 셀 tnum ──────────────────────────────────────────── */
+.tnum {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
 }

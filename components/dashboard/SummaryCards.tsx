@@ -18,17 +18,17 @@ const CATEGORY_CONFIG = {
   전기: {
     icon: <Zap size={20} />,
     iconColor: `text-[${CATEGORY_COLORS["전기"]}]`,
-    iconBg: "bg-[#e8f0f9]",
+    iconBg: "bg-[#9f86ff]/10",
   },
   원소재: {
     icon: <Package size={20} />,
     iconColor: `text-[${CATEGORY_COLORS["원소재"]}]`,
-    iconBg: "bg-[#edf6fd]",
+    iconBg: "bg-[#2995d9]/10",
   },
   운송: {
     icon: <Truck size={20} />,
     iconColor: `text-[${CATEGORY_COLORS["운송"]}]`,
-    iconBg: "bg-[#f0faff]",
+    iconBg: "bg-[#79cff2]/10",
   },
 } as const;
 
@@ -95,8 +95,8 @@ export default function SummaryCards({
       value: total.value,
       unit: total.unit,
       icon: <Leaf size={20} />,
-      iconColor: "text-green-600",
-      iconBg: "bg-green-50",
+      iconColor: "text-emerald-400",
+      iconBg: "bg-emerald-500/10",
       monthlyChange: calcMonthlyChange(),
       peakMonth: calcPeakMonth(),
       period,

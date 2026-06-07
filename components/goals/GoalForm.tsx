@@ -70,47 +70,47 @@ export default function GoalForm({
 
   return (
     <div className="card p-6 self-start sticky top-6">
-      <h3 className="text-base font-semibold text-slate-100 mb-5">
+      <h3 className="text-base font-semibold text-[#0d253d] mb-5">
         {editTarget ? "목표 수정" : "목표 설정"}
       </h3>
       <div className="flex flex-col gap-4">
         {/* 연도 */}
         <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1.5">
-            연도 <span className="text-red-400">*</span>
+          <label className="block text-sm font-medium text-[#64748d] mb-1.5">
+            연도 <span className="text-red-500">*</span>
           </label>
           <Input
             type="number"
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-            className={errors.year ? "border-red-500/50" : ""}
+            className={errors.year ? "border-red-300" : ""}
           />
           {errors.year && (
-            <p className="mt-1 text-xs text-red-400">{errors.year}</p>
+            <p className="mt-1 text-xs text-red-500">{errors.year}</p>
           )}
         </div>
 
         {/* 목표 배출량 */}
         <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1.5">
-            목표 배출량 (kgCO₂e) <span className="text-red-400">*</span>
+          <label className="block text-sm font-medium text-[#64748d] mb-1.5">
+            목표 배출량 (kgCO₂e) <span className="text-red-500">*</span>
           </label>
           <Input
             type="number"
             value={targetCo2e}
             onChange={(e) => setTargetCo2e(e.target.value)}
             placeholder="예: 5000"
-            className={errors.targetCo2e ? "border-red-500/50" : ""}
+            className={errors.targetCo2e ? "border-red-300" : ""}
           />
           {errors.targetCo2e && (
-            <p className="mt-1 text-xs text-red-400">{errors.targetCo2e}</p>
+            <p className="mt-1 text-xs text-red-500">{errors.targetCo2e}</p>
           )}
         </div>
 
         {/* 현재 배출량 참고 */}
-        <div className="px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-xs text-slate-400">
+        <div className="px-3 py-2 rounded-lg bg-[#f6f9fc] border border-[#e3e8ee] text-xs text-[#64748d]">
           현재 총 배출량:{" "}
-          <span className="text-slate-200 font-medium">
+          <span className="tnum text-[#0d253d] font-medium">
             {totalCo2e.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}{" "}
             kgCO₂e
           </span>
@@ -118,12 +118,12 @@ export default function GoalForm({
 
         {/* 에러/성공 메시지 */}
         {saveError && (
-          <div className="px-3 py-2.5 rounded-lg text-sm bg-red-500/10 border border-red-500/30 text-red-400">
+          <div className="px-3 py-2.5 rounded-lg text-sm bg-red-50 border border-red-100 text-red-600">
             {saveError}
           </div>
         )}
         {successMessage && (
-          <div className="px-3 py-2.5 rounded-lg text-sm bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+          <div className="px-3 py-2.5 rounded-lg text-sm bg-emerald-50 border border-emerald-100 text-emerald-700">
             {successMessage}
           </div>
         )}
@@ -135,7 +135,7 @@ export default function GoalForm({
           {editTarget && (
             <button
               onClick={onCancelEdit}
-              className="py-2.5 rounded-lg text-sm font-medium text-slate-400 bg-slate-700 hover:bg-slate-600 transition-colors"
+              className="py-2.5 rounded-full text-sm font-medium text-[#64748d] bg-[#f6f9fc] border border-[#e3e8ee] hover:bg-[#e3e8ee] transition-colors"
             >
               취소
             </button>
@@ -143,7 +143,7 @@ export default function GoalForm({
           <button
             onClick={handleSubmit}
             disabled={isSaving}
-            className="py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors"
+            className="py-2.5 rounded-full text-sm font-semibold text-white bg-[#533afd] hover:bg-[#4434d4] disabled:bg-[#a8c3de] disabled:cursor-not-allowed transition-colors"
           >
             {isSaving ? "저장 중..." : editTarget ? "수정 완료" : "목표 저장"}
           </button>

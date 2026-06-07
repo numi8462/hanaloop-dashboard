@@ -25,10 +25,10 @@ export default function GoalCard({
     <div className="card p-5">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <p className="text-base font-semibold text-slate-100">
+          <p className="text-base font-semibold text-[#0d253d]">
             {goal.year}년 목표
           </p>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="tnum text-xs text-[#64748d] mt-0.5">
             목표:{" "}
             {goal.targetCo2e.toLocaleString("ko-KR", {
               maximumFractionDigits: 1,
@@ -40,14 +40,14 @@ export default function GoalCard({
           <button
             onClick={() => onEdit(goal)}
             disabled={isSaving}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-[#2995D9] hover:bg-[#2995D9]/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-1.5 rounded-lg text-[#94a3b8] hover:text-[#533afd] hover:bg-[#533afd]/8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Pencil size={14} />
           </button>
           <button
             onClick={() => onDelete(goal.id)}
             disabled={isSaving}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-1.5 rounded-lg text-[#94a3b8] hover:text-red-500 hover:bg-red-500/8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Trash2 size={14} />
           </button>
@@ -57,13 +57,13 @@ export default function GoalCard({
       <ProgressBar current={currentCo2e} target={goal.targetCo2e} />
 
       <div className="flex items-center justify-between mt-2">
-        <span className="text-xs text-slate-400">
+        <span className="tnum text-xs text-[#64748d]">
           현재{" "}
           {currentCo2e.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}{" "}
           kgCO₂e
         </span>
         <span
-          className={`text-xs font-semibold ${isOver ? "text-red-400" : "text-emerald-400"}`}
+          className={`tnum text-xs font-semibold ${isOver ? "text-red-500" : "text-emerald-600"}`}
         >
           {pct}%
         </span>
@@ -72,23 +72,27 @@ export default function GoalCard({
       <div
         className={`mt-3 px-3 py-2 rounded-lg text-xs ${
           isOver
-            ? "bg-red-500/10 border border-red-500/20 text-red-400"
-            : "bg-emerald-500/10 border border-emerald-500/20 text-emerald-400"
+            ? "bg-red-50 border border-red-100 text-red-600"
+            : "bg-emerald-50 border border-emerald-100 text-emerald-700"
         }`}
       >
         {isOver ? (
           <>
             목표 초과:{" "}
-            {Math.abs(remaining).toLocaleString("ko-KR", {
-              maximumFractionDigits: 1,
-            })}{" "}
-            kgCO₂e
+            <span className="tnum">
+              {Math.abs(remaining).toLocaleString("ko-KR", {
+                maximumFractionDigits: 1,
+              })}{" "}
+              kgCO₂e
+            </span>
           </>
         ) : (
           <>
             목표까지 남은 감축량:{" "}
-            {remaining.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}{" "}
-            kgCO₂e
+            <span className="tnum">
+              {remaining.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}{" "}
+              kgCO₂e
+            </span>
           </>
         )}
       </div>

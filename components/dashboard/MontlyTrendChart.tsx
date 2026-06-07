@@ -83,7 +83,7 @@ function CustomLegend({ payload }: CustomLegendProps) {
             className="rounded-full w-2 h-2"
             style={{ background: entry.color }}
           />
-          <span className="text-xs text-slate-300">{entry.value}</span>
+          <span className="text-xs text-[#64748d]">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -123,18 +123,18 @@ export default function MonthlyTrendChart({
     <div className="card p-5">
       {/* 헤더 */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-semibold text-slate-300">
+        <h3 className="text-sm font-medium text-[#64748d]">
           월별 배출량 추이
         </h3>
         <div className="flex items-center gap-2">
           {/* 토글 버튼 */}
-          <div className="flex rounded-lg overflow-hidden text-xs">
+          <div className="flex rounded-full overflow-hidden text-xs border border-[#e3e8ee]">
             <button
               onClick={() => handleModeChange("stack")}
               className={`px-3 py-1.5 font-medium transition-colors ${
                 mode === "stack"
-                  ? "bg-slate-900 text-white"
-                  : "bg-white text-slate-500"
+                  ? "bg-[#533afd] text-white"
+                  : "bg-white text-[#64748d] hover:bg-[#f6f9fc]"
               }`}
             >
               누적
@@ -143,14 +143,14 @@ export default function MonthlyTrendChart({
               onClick={() => handleModeChange("group")}
               className={`px-3 py-1.5 font-medium transition-colors ${
                 mode === "group"
-                  ? "bg-slate-900 text-white"
-                  : "bg-white text-slate-500"
+                  ? "bg-[#533afd] text-white"
+                  : "bg-white text-[#64748d] hover:bg-[#f6f9fc]"
               }`}
             >
               그룹
             </button>
           </div>
-          <span className="text-xs text-slate-900 bg-slate-100 px-2 py-1 rounded-full">
+          <span className="text-xs text-[#64748d] bg-[#f0efff] px-2 py-1 rounded-full">
             kgCO₂e
           </span>
         </div>

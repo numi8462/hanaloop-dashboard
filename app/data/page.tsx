@@ -64,17 +64,17 @@ export default function DataPage() {
       {/* 헤더 */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-100">
+          <h1 className="text-2xl font-semibold text-[#0d253d]" style={{ letterSpacing: "-0.64px" }}>
             데이터 관리
           </h1>
-          <p className="text-sm mt-1 text-slate-400">
+          <p className="text-sm mt-1 text-[#64748d]">
             전기, 원소재, 운송 등 탄소 배출 활동 데이터를 입력·관리합니다
           </p>
         </div>
         {/* 모바일에서만 보이는 토글 버튼 */}
         <button
           onClick={() => setIsFormOpen((prev) => !prev)}
-          className="lg:hidden fixed top-4 right-4 z-10 flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-white bg-[#08428C] hover:bg-[#05285a] transition-colors shadow-sm"
+          className="lg:hidden fixed top-4 right-4 z-10 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white bg-[#533afd] hover:bg-[#4434d4] transition-colors shadow-sm"
         >
           {isFormOpen ? <X size={16} /> : <Plus size={16} />}
           {isFormOpen ? "닫기" : "데이터 추가"}

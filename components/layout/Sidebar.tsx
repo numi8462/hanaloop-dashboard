@@ -57,7 +57,7 @@ function NavContent({ onClose }: { onClose?: () => void }) {
   return (
     <>
       {/* 로고 */}
-      <div className="flex items-center px-5 h-16 border-b border-border gap-2">
+      <div className="flex items-center px-5 h-16 border-b border-[#e3e8ee] gap-2">
         <Image
           src="/hanaloop-logo.png"
           alt="HanaLoop"
@@ -66,12 +66,11 @@ function NavContent({ onClose }: { onClose?: () => void }) {
           className="h-6 w-auto"
           priority
         />
-        <p className="font-semibold text-slate-900">하나루프</p>
-        {/* 모바일에서 닫기 버튼 */}
+        <p className="font-semibold text-[#0d253d]">하나루프</p>
         {onClose && (
           <button
             onClick={onClose}
-            className="ml-auto text-slate-400 hover:text-slate-900"
+            className="ml-auto text-[#64748d] hover:text-[#0d253d] transition-colors"
           >
             <X size={20} />
           </button>
@@ -80,7 +79,7 @@ function NavContent({ onClose }: { onClose?: () => void }) {
 
       {/* 네비게이션 */}
       <nav className="flex-1 px-3 py-4">
-        <p className="px-2 py-1 text-xs font-semibold tracking-widest mb-1 text-slate-400">
+        <p className="px-2 py-1 text-[10px] font-semibold tracking-widest uppercase mb-2 text-[#94a3b8]">
           메인 메뉴
         </p>
         <ul className="space-y-0.5">
@@ -101,21 +100,21 @@ function NavContent({ onClose }: { onClose?: () => void }) {
                     flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                     ${
                       isActive
-                        ? "bg-slate-900 text-white"
+                        ? "bg-[#533afd]/8 text-[#533afd]"
                         : isDisabled
-                          ? "text-slate-400 opacity-60 cursor-not-allowed"
-                          : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                          ? "text-[#94a3b8] opacity-60 cursor-not-allowed"
+                          : "text-[#64748d] hover:bg-[#f6f9fc] hover:text-[#0d253d]"
                     }
                   `}
                 >
                   {item.icon}
                   <span className="flex-1">{item.label}</span>
                   {item.badge ? (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded font-medium bg-yellow-100 text-yellow-600">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded font-medium bg-[#f0efff] text-[#533afd]">
                       {item.badge}
                     </span>
                   ) : isActive ? (
-                    <ChevronRight size={14} />
+                    <ChevronRight size={14} className="text-[#533afd]/50" />
                   ) : null}
                 </Link>
               </li>
@@ -133,29 +132,29 @@ export default function Sidebar() {
   return (
     <>
       {/* 데스크탑 사이드바 */}
-      <aside className="hidden lg:flex fixed left-0 top-0 h-screen flex-col w-60 bg-white border-r border-border z-40">
+      <aside className="hidden lg:flex fixed left-0 top-0 h-screen flex-col w-60 bg-white border-r border-[#e3e8ee] z-40">
         <NavContent />
       </aside>
 
       {/* 모바일 햄버거 버튼 */}
       <button
         onClick={() => setIsOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white border border-border shadow-sm"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white border border-[#e3e8ee] shadow-sm"
       >
-        <Menu size={20} className="text-slate-600" />
+        <Menu size={20} className="text-[#64748d]" />
       </button>
 
       {/* 모바일 오버레이 */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/40 z-50"
+          className="lg:hidden fixed inset-0 bg-[#0d253d]/30 z-50"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* 모바일 드로어 */}
       <aside
-        className={`lg:hidden fixed left-0 top-0 h-screen flex flex-col w-60 bg-white border-r border-border z-50 transition-transform duration-300 ${
+        className={`lg:hidden fixed left-0 top-0 h-screen flex flex-col w-60 bg-white border-r border-[#e3e8ee] z-50 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

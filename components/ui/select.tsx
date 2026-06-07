@@ -44,11 +44,11 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-slate-600 bg-[#2f323a] py-2 pr-2 pl-2.5 text-sm text-slate-200",
-        "focus-visible:border-[#0b3d91] focus-visible:ring-2 focus-visible:ring-[#0b3d91]/30",
-        "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[#2a2e36]",
-        "aria-invalid:border-red-500/50 aria-invalid:ring-2 aria-invalid:ring-red-500/20",
-        "data-placeholder:text-slate-500",
+        "flex w-full items-center justify-between gap-1.5 rounded-md border border-[#a8c3de] bg-white h-9 px-3 text-sm text-[#0d253d]",
+        "focus-visible:border-[#533afd] focus-visible:ring-2 focus-visible:ring-[#533afd]/15",
+        "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[#f6f9fc]",
+        "aria-invalid:border-red-300 aria-invalid:ring-2 aria-invalid:ring-red-100",
+        "data-placeholder:text-[#94a3b8]",
         className,
       )}
       {...props}
@@ -74,7 +74,8 @@ function SelectContent({
         data-slot="select-content"
         data-align-trigger={position === "item-aligned"}
         className={cn(
-          "relative z-50 max-h-(--radix-select-content-available-height) min-w-36 overflow-y-auto rounded-lg bg-[#2f323a] text-slate-200 shadow-md border border-slate-600",
+          "relative z-50 max-h-(--radix-select-content-available-height) min-w-36 overflow-y-auto rounded-lg bg-white text-[#0d253d] border border-[#e3e8ee]",
+          "shadow-[rgba(0,55,112,0.08)_0_8px_24px,rgba(0,55,112,0.04)_0_2px_6px]",
           position === "popper" &&
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
           className,
@@ -121,8 +122,8 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm text-slate-200",
-        "focus:bg-[#3a3f4b] focus:text-white",
+        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1.5 pr-8 pl-2 text-sm text-[#0d253d]",
+        "focus:bg-[#f0efff] focus:text-[#533afd]",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
       )}
@@ -159,7 +160,7 @@ function SelectScrollUpButton({
     <SelectPrimitive.ScrollUpButton
       data-slot="select-scroll-up-button"
       className={cn(
-        "z-10 flex cursor-default items-center justify-center bg-[#2f323a] py-1 [&_svg:not([class*='size-'])]:size-4",
+        "z-10 flex cursor-default items-center justify-center bg-white py-1 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
@@ -177,7 +178,7 @@ function SelectScrollDownButton({
     <SelectPrimitive.ScrollDownButton
       data-slot="select-scroll-down-button"
       className={cn(
-        "z-10 flex cursor-default items-center justify-center bg-[#2f323a] py-1 [&_svg:not([class*='size-'])]:size-4",
+        "z-10 flex cursor-default items-center justify-center bg-white py-1 [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}

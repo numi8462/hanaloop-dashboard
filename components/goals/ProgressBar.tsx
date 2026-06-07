@@ -8,10 +8,10 @@ export default function ProgressBar({ current, target }: ProgressBarProps) {
   const isOver = current > target;
 
   return (
-    <div className="w-full bg-slate-700 rounded-full h-2">
+    <div className="w-full bg-[#e3e8ee] rounded-full h-1.5">
       <div
-        className={`h-2 rounded-full transition-all ${
-          isOver ? "bg-red-500" : pct > 80 ? "bg-amber-400" : "bg-emerald-400"
+        className={`h-1.5 rounded-full transition-all ${
+          isOver ? "bg-red-500" : pct > 80 ? "bg-amber-400" : "bg-emerald-500"
         }`}
         style={{ width: `${pct}%` }}
       />

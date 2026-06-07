@@ -31,13 +31,13 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
 
   const data = payload[0].payload;
   return (
-    <div className="bg-white border border-slate-200 rounded-xl px-3 py-2 shadow-md text-sm">
-      <p className="font-semibold text-slate-900 mb-1">{data.type}</p>
-      <p className="text-slate-500">
+    <div className="bg-white border border-[#e3e8ee] rounded-xl px-3 py-2 shadow-sm text-sm">
+      <p className="font-semibold text-[#0d253d] mb-1">{data.type}</p>
+      <p className="tnum text-[#64748d]">
         {data.totalCo2e.toLocaleString("ko-KR", { maximumFractionDigits: 2 })}{" "}
         kgCO₂e
       </p>
-      <p className="text-slate-400">{data.percentage}%</p>
+      <p className="text-[#94a3b8]">{data.percentage}%</p>
     </div>
   );
 }
@@ -52,7 +52,7 @@ function CustomLegend({ payload }: CustomLegendProps) {
             className="rounded-full w-2 h-2"
             style={{ background: entry.color }}
           />
-          <span className="text-xs text-slate-300">{entry.value}</span>
+          <span className="text-xs text-[#64748d]">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -79,7 +79,7 @@ export default function CategoryChart({
 
   return (
     <div className="card p-5 h-60">
-      <h3 className="text-sm font-semibold text-slate-300 mb-4">
+      <h3 className="text-sm font-medium text-[#64748d] mb-4">
         카테고리별 배출 비율
       </h3>
       <ResponsiveContainer width="100%" height={180}>

@@ -145,15 +145,15 @@ export default function ActivityForm({
 
   return (
     <div className="card p-6">
-      <h3 className="text-base font-semibold text-slate-100 mb-5">
+      <h3 className="text-base font-semibold text-[#0d253d] mb-5">
         {editTarget ? "활동 데이터 수정" : "활동 데이터 추가"}
       </h3>
 
       <div className="flex flex-col gap-4">
         {/* 날짜 */}
         <div>
-          <label className="text-sm text-slate-300 mb-1.5 block">
-            날짜 <span className="text-red-400">*</span>
+          <label className="text-sm text-[#64748d] mb-1.5 block">
+            날짜 <span className="text-red-500">*</span>
           </label>
           <Input
             type="date"
@@ -163,14 +163,14 @@ export default function ActivityForm({
             aria-invalid={!!(errors.date && touched.date)}
           />
           {errors.date && touched.date && (
-            <p className="mt-1 text-xs text-red-400">{errors.date}</p>
+            <p className="mt-1 text-xs text-red-500">{errors.date}</p>
           )}
         </div>
 
         {/* 유형 */}
         <div>
-          <label className="text-sm text-slate-300 mb-1.5 block">
-            유형 <span className="text-red-400">*</span>
+          <label className="text-sm text-[#64748d] mb-1.5 block">
+            유형 <span className="text-red-500">*</span>
           </label>
           <Select
             value={form.type}
@@ -191,14 +191,14 @@ export default function ActivityForm({
             </SelectContent>
           </Select>
           {errors.type && touched.type && (
-            <p className="mt-1 text-xs text-red-400">{errors.type}</p>
+            <p className="mt-1 text-xs text-red-500">{errors.type}</p>
           )}
         </div>
 
         {/* 설명 */}
         <div>
-          <label className="text-sm text-slate-300 mb-1.5 block">
-            설명 <span className="text-red-400">*</span>
+          <label className="text-sm text-[#64748d] mb-1.5 block">
+            설명 <span className="text-red-500">*</span>
           </label>
           <Select
             value={form.description}
@@ -221,15 +221,15 @@ export default function ActivityForm({
             </SelectContent>
           </Select>
           {errors.description && touched.description && (
-            <p className="mt-1 text-xs text-red-400">{errors.description}</p>
+            <p className="mt-1 text-xs text-red-500">{errors.description}</p>
           )}
         </div>
 
         {/* 수량 + 단위 */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-sm text-slate-300 mb-1.5 block">
-              수량 <span className="text-red-400">*</span>
+            <label className="text-sm text-[#64748d] mb-1.5 block">
+              수량 <span className="text-red-500">*</span>
             </label>
             <Input
               type="number"
@@ -239,12 +239,12 @@ export default function ActivityForm({
               aria-invalid={!!(errors.amount && touched.amount)}
             />
             {errors.amount && touched.amount && (
-              <p className="mt-1 text-xs text-red-400">{errors.amount}</p>
+              <p className="mt-1 text-xs text-red-500">{errors.amount}</p>
             )}
           </div>
 
           <div>
-            <label className="text-sm text-slate-300 mb-1.5 block">단위</label>
+            <label className="text-sm text-[#64748d] mb-1.5 block">단위</label>
             <Input
               value={form.type ? UNIT_MAP[form.type] : ""}
               placeholder="설정 시 자동 적용"
@@ -255,14 +255,14 @@ export default function ActivityForm({
 
         {/* 에러 메시지 */}
         {saveError && (
-          <div className="px-3 py-2.5 rounded-lg text-sm bg-red-500/10 border border-red-500/30 text-red-400">
+          <div className="px-3 py-2.5 rounded-lg text-sm bg-red-50 border border-red-100 text-red-600">
             {saveError}
           </div>
         )}
 
         {/* 성공 메시지 */}
         {successMessage && (
-          <div className="px-3 py-2.5 rounded-lg text-sm bg-green-500/10 border border-green-500/30 text-green-400">
+          <div className="px-3 py-2.5 rounded-lg text-sm bg-emerald-50 border border-emerald-100 text-emerald-700">
             {successMessage}
           </div>
         )}
@@ -274,7 +274,7 @@ export default function ActivityForm({
           {editTarget && (
             <button
               onClick={onCancelEdit}
-              className="py-2.5 rounded-lg text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+              className="py-2.5 rounded-full text-sm font-medium text-[#64748d] bg-[#f6f9fc] border border-[#e3e8ee] hover:bg-[#e3e8ee] transition-colors"
             >
               취소
             </button>
@@ -282,7 +282,7 @@ export default function ActivityForm({
           <button
             onClick={handleSubmit}
             disabled={isSaving}
-            className="py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+            className="py-2.5 rounded-full text-sm font-semibold text-white bg-[#533afd] hover:bg-[#4434d4] disabled:bg-[#a8c3de] disabled:cursor-not-allowed transition-colors"
           >
             {isSaving ? "저장 중..." : editTarget ? "수정 완료" : "데이터 추가"}
           </button>

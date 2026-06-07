@@ -43,10 +43,10 @@ export default function GoalsPage() {
   return (
     <div className="p-6 lg:p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight text-white">
+        <h1 className="text-2xl font-semibold text-[#0d253d]" style={{ letterSpacing: "-0.64px" }}>
           목표 관리
         </h1>
-        <p className="text-sm mt-1 text-slate-400">
+        <p className="text-sm mt-1 text-[#64748d]">
           연도별 탄소 감축 목표를 설정하고 진행률을 확인합니다
         </p>
       </div>
@@ -75,7 +75,7 @@ export default function GoalsPage() {
               <GoalCardSkeleton key={i} />
             ))
           ) : goals.length === 0 ? (
-            <div className="card p-12 text-center text-sm text-slate-400">
+            <div className="card p-12 text-center text-sm text-[#64748d]">
               설정된 목표가 없습니다. 왼쪽 폼에서 목표를 추가해주세요.
             </div>
           ) : (
