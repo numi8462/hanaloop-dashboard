@@ -13,7 +13,6 @@ export async function POST(request: NextRequest) {
   try {
     const { messages } = await request.json();
 
-    // 현재 PCF 데이터 수집
     const [activities, emissionFactors] = await Promise.all([
       dbGetActivities(),
       dbGetActiveEmissionFactors(),
@@ -48,6 +47,14 @@ ${byMonth
       `- ${m.yearMonth}: ${Object.values(m.byType)
         .reduce((s, v) => s + v, 0)
         .toFixed(2)} kgCO₂e`,
+  )
+  .join("\n")}
+
+=== 현재 배출계수 ===
+${emissionFactors
+  .map(
+    (f) =>
+      `- ${f.type} (${f.description}): ${f.emissionFactor} ${f.unit} (v${f.version}, ${f.validFrom.slice(0, 10)}부터 적용)`,
   )
   .join("\n")}
     `.trim();
