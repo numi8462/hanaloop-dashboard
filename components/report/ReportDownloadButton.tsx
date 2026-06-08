@@ -44,7 +44,7 @@ export default function ReportDownloadButton({
     <button
       onClick={handleDownload}
       disabled={disabled || isGenerating}
-      className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#0b3d91] hover:bg-[#174ea6] disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors"
+      className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#533afd] hover:bg-[#4434d4] disabled:bg-[#a8c3de] disabled:cursor-not-allowed transition-colors"
     >
       <Download size={16} />
       {isGenerating ? "생성 중..." : "Excel 보고서 다운로드"}
