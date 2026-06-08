@@ -18,7 +18,7 @@ interface DashboardState {
 }
 
 export const useDashboardStore = create<DashboardState>((set, get) => ({
-  selectedYear: "2025",
+  selectedYear: "",
   selectedType: null,
   summary: null,
   pcfResults: [],
